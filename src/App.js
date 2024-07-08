@@ -1,15 +1,36 @@
-import Header from './components/header';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import MainLayout from './layouts/MainLayout';
+import HomeLayout from './layouts/HomeLayout';
+
 import Home from './pages/home';
+import Registration from './pages/registration';
 
 import './default.scss';
 
 function App() {
   return (
     <div className='App'>
-      <Header />
-      <div className='main'>
-        <Home />
-      </div>
+      <Router>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <HomeLayout>
+                <Home />
+              </HomeLayout>
+            }
+          />
+          <Route
+            path='/registration'
+            element={
+              <MainLayout>
+                <Registration />
+              </MainLayout>
+            }
+          />
+        </Routes>
+      </Router>
     </div>
   );
 }
