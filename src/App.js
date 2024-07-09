@@ -71,9 +71,13 @@ function App() {
           <Route
             path='/registration'
             element={
-              <MainLayout currentUser={state.currentUser}>
-                <Registration />
-              </MainLayout>
+              state.currentUser ? (
+                <Navigate to='/' replace />
+              ) : (
+                <MainLayout currentUser={state.currentUser}>
+                  <Registration />
+                </MainLayout>
+              )
             }
           />
           <Route
