@@ -6,7 +6,8 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
-import { auth } from './firebase/utils';
+import { auth, handleUserProfile } from './firebase/utils';
+import { onSnapshot } from 'firebase/firestore';
 
 import MainLayout from './layouts/MainLayout';
 import HomeLayout from './layouts/HomeLayout';
@@ -27,12 +28,22 @@ function App() {
   });
 
   useEffect(() => {
-    const authListener = auth.onAuthStateChanged((userAuth) => {
-      if (!userAuth) {
-        setState({
-          ...initialState,
+    const authListener = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await handleUserProfile(userAuth);
+        onSnapshot(userRef, (snapshot) => {
+          setState({
+            currentUser: {
+              id: snapshot.id,
+              ...snapshot.data(),
+            },
+          });
         });
       }
+
+      setState({
+        ...initialState,
+      });
 
       setState((prevState) => ({
         ...prevState,
