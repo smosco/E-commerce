@@ -5,6 +5,7 @@ import HomeLayout from './layouts/HomeLayout';
 
 import Home from './pages/home';
 import Registration from './pages/registration';
+import Login from './pages/login';
 
 import './default.scss';
 
@@ -26,6 +27,14 @@ function App() {
             element={
               <MainLayout>
                 <Registration />
+              </MainLayout>
+            }
+          />
+          <Route
+            path='/login'
+            element={
+              <MainLayout>
+                <Login />
               </MainLayout>
             }
           />
