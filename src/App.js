@@ -15,6 +15,7 @@ import HomeLayout from './layouts/HomeLayout';
 import Home from './pages/home';
 import Registration from './pages/registration';
 import Login from './pages/login';
+import Recovery from './pages/recovery';
 
 import './default.scss';
 
@@ -90,6 +91,14 @@ function App() {
                   <Login />
                 </MainLayout>
               )
+            }
+          />
+          <Route
+            path='/recovery'
+            element={
+              <MainLayout currentUser={state.currentUser}>
+                <Recovery />
+              </MainLayout>
             }
           />
         </Routes>
