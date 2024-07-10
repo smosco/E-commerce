@@ -18,6 +18,9 @@ import Home from './pages/home';
 import Registration from './pages/registration';
 import Login from './pages/login';
 import Recovery from './pages/recovery';
+import Dashboard from './pages/dashboard';
+
+import WithAuth from './hoc/WithAuth';
 
 import './default.scss';
 
@@ -89,6 +92,16 @@ function App() {
               <MainLayout>
                 <Recovery />
               </MainLayout>
+            }
+          />
+          <Route
+            path='/dashboard'
+            element={
+              <WithAuth>
+                <MainLayout>
+                  <Dashboard />
+                </MainLayout>
+              </WithAuth>
             }
           />
         </Routes>
