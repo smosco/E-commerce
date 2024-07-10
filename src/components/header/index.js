@@ -2,10 +2,13 @@ import React from 'react';
 import './styles.scss';
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase/utils';
+import useUserStore from '../../zustand/userStore';
 
 import Logo from './../../assets/logo.png';
 
-const Header = ({ currentUser }) => {
+const Header = () => {
+  const { currentUser } = useUserStore();
+
   return (
     <header className='header'>
       <div className='wrap'>

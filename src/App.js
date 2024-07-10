@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import {
   BrowserRouter as Router,
@@ -8,6 +8,8 @@ import {
 } from 'react-router-dom';
 import { auth, handleUserProfile } from './firebase/utils';
 import { onSnapshot } from 'firebase/firestore';
+
+import useUserStore from './zustand/userStore';
 
 import MainLayout from './layouts/MainLayout';
 import HomeLayout from './layouts/HomeLayout';
@@ -19,43 +21,31 @@ import Recovery from './pages/recovery';
 
 import './default.scss';
 
-const initialState = {
-  currentUser: null,
-};
-
 function App() {
-  const [state, setState] = useState({
-    ...initialState,
-  });
+  const { currentUser, setCurrentUser } = useUserStore();
 
   useEffect(() => {
     const authListener = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await handleUserProfile(userAuth);
         onSnapshot(userRef, (snapshot) => {
-          setState({
+          setCurrentUser({
             currentUser: {
               id: snapshot.id,
               ...snapshot.data(),
             },
           });
         });
+      } else {
+        setCurrentUser(null);
       }
-
-      setState({
-        ...initialState,
-      });
-
-      setState((prevState) => ({
-        ...prevState,
-        currentUser: userAuth,
-      }));
     });
+
     // 컴포넌트 언마운트 시 authListener 해제
     return () => {
       authListener();
     };
-  }, []);
+  }, [setCurrentUser]);
 
   return (
     <div className='App'>
@@ -64,7 +54,7 @@ function App() {
           <Route
             path='/'
             element={
-              <HomeLayout currentUser={state.currentUser}>
+              <HomeLayout>
                 <Home />
               </HomeLayout>
             }
@@ -72,10 +62,10 @@ function App() {
           <Route
             path='/registration'
             element={
-              state.currentUser ? (
+              currentUser ? (
                 <Navigate to='/' replace />
               ) : (
-                <MainLayout currentUser={state.currentUser}>
+                <MainLayout>
                   <Registration />
                 </MainLayout>
               )
@@ -84,10 +74,10 @@ function App() {
           <Route
             path='/login'
             element={
-              state.currentUser ? (
+              currentUser ? (
                 <Navigate to='/' replace />
               ) : (
-                <MainLayout currentUser={state.currentUser}>
+                <MainLayout>
                   <Login />
                 </MainLayout>
               )
@@ -96,7 +86,7 @@ function App() {
           <Route
             path='/recovery'
             element={
-              <MainLayout currentUser={state.currentUser}>
+              <MainLayout>
                 <Recovery />
               </MainLayout>
             }
