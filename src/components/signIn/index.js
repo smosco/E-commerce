@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './styles.scss';
 import Button from '../forms/button';
@@ -17,6 +17,8 @@ const SignIn = () => {
 
   const [formData, setFormData] = useState(initialState);
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -31,9 +33,12 @@ const SignIn = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
+
       setFormData({
         ...initialState,
       });
+
+      navigate('/');
     } catch (err) {
       console.log(err);
     }
