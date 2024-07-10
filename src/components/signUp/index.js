@@ -80,28 +80,28 @@ const SignUp = () => {
             name='displayName'
             value={formState.displayName}
             placeholder='Full Name'
-            onChange={handleChange}
+            handleChange={handleChange}
           />
           <FormInput
             type='email'
             name='email'
             value={formState.email}
             placeholder='Email'
-            onChange={handleChange}
+            handleChange={handleChange}
           />
           <FormInput
             type='password'
             name='password'
             value={formState.password}
             placeholder='Password'
-            onChange={handleChange}
+            handleChange={handleChange}
           />
           <FormInput
             type='password'
             name='confirmPassword'
             value={formState.confirmPassword}
             placeholder='Confirm Password'
-            onChange={handleChange}
+            handleChange={handleChange}
           />
 
           <Button type='submit'>Register</Button>

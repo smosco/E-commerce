@@ -75,7 +75,7 @@ const EmailPassword = () => {
             name='email'
             value={formStatus.email}
             placeholder='Email'
-            onChange={handleChange}
+            handleChange={handleChange}
           />
           <Button type='submit'>Email Password</Button>
         </form>
