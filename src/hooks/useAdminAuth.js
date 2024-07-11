@@ -8,7 +8,11 @@ const useAdminAuth = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!checkUserIsAdmin(currentUser)) {
+    if (!currentUser) {
+      navigate('/login');
+    }
+
+    if (currentUser && !checkUserIsAdmin(currentUser.currentUser)) {
       navigate('/login');
     }
   }, [currentUser, navigate]);
