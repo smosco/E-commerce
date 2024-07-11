@@ -23,12 +23,14 @@ const handleUserProfile = async (userAuth, additionalData) => {
   if (!snapshot.exists()) {
     const { displayName, email } = userAuth;
     const timestamp = new Date();
+    const userRoles = ['user'];
 
     try {
       await setDoc(userRef, {
         displayName,
         email,
         createdDate: timestamp,
+        userRoles,
         ...additionalData,
       });
     } catch (err) {
