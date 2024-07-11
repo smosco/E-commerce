@@ -1,20 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useUserStore from '../zustand/userStore';
 import { checkUserIsAdmin } from '../utils';
 
 const useAdminAuth = () => {
   const { currentUser } = useUserStore();
-  const [isAdmin, setIsAdmin] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (checkUserIsAdmin(currentUser)) {
-      setIsAdmin(true);
-    } else {
-      setIsAdmin(false);
+    if (!checkUserIsAdmin(currentUser)) {
+      navigate('/login');
     }
-  }, [currentUser]);
+  }, [currentUser, navigate]);
 
-  return isAdmin;
+  return currentUser;
 };
 
 export default useAdminAuth;
