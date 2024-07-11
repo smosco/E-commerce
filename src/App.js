@@ -15,6 +15,7 @@ import AdminToolbar from './components/adminToolbar';
 
 import MainLayout from './layouts/MainLayout';
 import HomeLayout from './layouts/HomeLayout';
+import AdminLayout from './layouts/AdminLayout';
 
 import Home from './pages/home';
 import Registration from './pages/registration';
@@ -113,9 +114,9 @@ function App() {
             path='/admin'
             element={
               <WithAdminAuth>
-                <MainLayout>
+                <AdminLayout>
                   <Admin />
-                </MainLayout>
+                </AdminLayout>
               </WithAdminAuth>
             }
           />
