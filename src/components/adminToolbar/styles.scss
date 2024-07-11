@@ -1,0 +1,36 @@
+.adminToolbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  background-color: black;
+  height: auto;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  ul,
+  li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul {
+    display: flex;
+    li {
+      a {
+        display: block;
+        font-size: 1.6rem;
+        line-height: 1;
+        color: white;
+        padding: 1rem;
+        transition: all 0.4s ease-in-out;
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.6);
+        color: black;
+      }
+    }
+  }
+}

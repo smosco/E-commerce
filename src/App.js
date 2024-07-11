@@ -11,6 +11,8 @@ import { onSnapshot } from 'firebase/firestore';
 
 import useUserStore from './zustand/userStore';
 
+import AdminToolbar from './components/adminToolbar';
+
 import MainLayout from './layouts/MainLayout';
 import HomeLayout from './layouts/HomeLayout';
 
@@ -22,9 +24,9 @@ import Dashboard from './pages/dashboard';
 import Admin from './pages/admin';
 
 import WithAuth from './hoc/WithAuth';
+import WithAdminAuth from './hoc/WithAdminAuth';
 
 import './default.scss';
-import WithAdminAuth from './hoc/WithAdminAuth';
 
 function App() {
   const { currentUser, setCurrentUser } = useUserStore();
@@ -55,6 +57,7 @@ function App() {
   return (
     <div className='App'>
       <Router>
+        <AdminToolbar />
         <Routes>
           <Route
             path='/'
