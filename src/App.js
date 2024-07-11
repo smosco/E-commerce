@@ -19,10 +19,12 @@ import Registration from './pages/registration';
 import Login from './pages/login';
 import Recovery from './pages/recovery';
 import Dashboard from './pages/dashboard';
+import Admin from './pages/admin';
 
 import WithAuth from './hoc/WithAuth';
 
 import './default.scss';
+import WithAdminAuth from './hoc/WithAdminAuth';
 
 function App() {
   const { currentUser, setCurrentUser } = useUserStore();
@@ -102,6 +104,16 @@ function App() {
                   <Dashboard />
                 </MainLayout>
               </WithAuth>
+            }
+          />
+          <Route
+            path='/admin'
+            element={
+              <WithAdminAuth>
+                <MainLayout>
+                  <Admin />
+                </MainLayout>
+              </WithAdminAuth>
             }
           />
         </Routes>
