@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import useProductStore from '../../zustand/productStore';
+
 import Modal from '../../components/modal';
 import FormInput from '../../components/forms/formInput';
 import FormSelect from '../../components/forms/formSelect';
@@ -6,6 +8,8 @@ import Button from '../../components/forms/button';
 import './styles.scss';
 
 const Admin = () => {
+  const { products, fetchProducts, addProduct, deleteProduct } =
+    useProductStore();
   const [hideModal, setHideModal] = useState(true);
   const [productDetails, setProductDetails] = useState({
     category: 'mens',
@@ -14,6 +18,10 @@ const Admin = () => {
     price: 0,
     desc: '',
   });
+
+  useEffect(() => {
+    fetchProducts({});
+  }, [fetchProducts]);
 
   const toggleModal = () => setHideModal(!hideModal);
 
@@ -38,7 +46,7 @@ const Admin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    addProduct({ ...productDetails });
     resetForm();
   };
 
@@ -99,6 +107,48 @@ const Admin = () => {
           </form>
         </div>
       </Modal>
+
+      <div className='manageProducts'>
+        <table border='0' cellpadding='0' cellSpacing='0'>
+          <tbody>
+            <tr>
+              <th>
+                <h1>Manage Products</h1>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <table
+                  className='results'
+                  border='0'
+                  cellpadding='0'
+                  cellSpacing='0'
+                >
+                  <tbody>
+                    {products.data.map((product, idx) => {
+                      const { name, thumbnail, price, documentID } = product;
+                      return (
+                        <tr>
+                          <td>
+                            <img src={thumbnail} alt='productThumbnail' />
+                          </td>
+                          <td>{name}</td>
+                          <td>{price}</td>
+                          <td>
+                            <Button onClick={() => deleteProduct(documentID)}>
+                              Delete
+                            </Button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
