@@ -23,6 +23,7 @@ import Login from './pages/login';
 import Recovery from './pages/recovery';
 import Dashboard from './pages/dashboard';
 import Admin from './pages/admin';
+import Search from './pages/search';
 
 import WithAuth from './hoc/WithAuth';
 import WithAdminAuth from './hoc/WithAdminAuth';
@@ -118,6 +119,14 @@ function App() {
                   <Admin />
                 </AdminLayout>
               </WithAdminAuth>
+            }
+          />
+          <Route
+            path='/search'
+            element={
+              <MainLayout>
+                <Search />
+              </MainLayout>
             }
           />
         </Routes>
