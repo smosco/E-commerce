@@ -2,7 +2,7 @@
   .wrap {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -1rem;
+    margin-left: -1rem;
   }
 }
 
@@ -51,6 +51,10 @@
         font-size: 1.6rem;
         line-height: 1;
         font-weight: 400;
+      }
+
+      .addToCart {
+        margin-top: 1rem;
       }
     }
   }
