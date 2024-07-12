@@ -6,6 +6,8 @@ import {
   getDoc,
   getDocs,
   deleteDoc,
+  query,
+  orderBy,
 } from 'firebase/firestore';
 
 export const handleAddProduct = async (product) => {
@@ -20,7 +22,9 @@ export const handleAddProduct = async (product) => {
 export const handleFetchProducts = async () => {
   try {
     const docRef = collection(firestore, 'products');
-    const snapshot = await getDocs(docRef);
+    const productsQuery = query(docRef, orderBy('createDate'));
+
+    const snapshot = await getDocs(productsQuery);
 
     const data = snapshot.docs.map((doc) => ({
       ...doc.data(),
