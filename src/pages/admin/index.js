@@ -130,7 +130,11 @@ const Admin = () => {
                       return (
                         <tr>
                           <td>
-                            <img src={thumbnail} alt='productThumbnail' />
+                            <img
+                              className='thumb'
+                              src={thumbnail}
+                              alt='productThumbnail'
+                            />
                           </td>
                           <td>{name}</td>
                           <td>{price}</td>
