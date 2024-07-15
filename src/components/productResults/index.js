@@ -66,14 +66,12 @@ const ProductResults = () => {
       <FormSelect {...configFilters} />
 
       <div className='wrap'>
-        {products.data.map((product, pos) => {
+        {data.map((product, pos) => {
           const { name, thumbnail, price } = product;
           if (!thumbnail || !name || typeof price === 'undefined') return null;
 
           const configProduct = {
-            thumbnail,
-            name,
-            price,
+            ...product,
           };
 
           return <Product {...configProduct} />;

@@ -24,6 +24,7 @@ import Recovery from './pages/recovery';
 import Dashboard from './pages/dashboard';
 import Admin from './pages/admin';
 import Search from './pages/search';
+import ProductDetails from './pages/productDetails';
 
 import WithAuth from './hoc/WithAuth';
 import WithAdminAuth from './hoc/WithAdminAuth';
@@ -135,6 +136,14 @@ function App() {
             element={
               <MainLayout>
                 <Search />
+              </MainLayout>
+            }
+          />
+          <Route
+            path='/product/:productID'
+            element={
+              <MainLayout>
+                <ProductDetails />
               </MainLayout>
             }
           />
