@@ -5,6 +5,7 @@ import Modal from '../../components/modal';
 import FormInput from '../../components/forms/formInput';
 import FormSelect from '../../components/forms/formSelect';
 import Button from '../../components/forms/button';
+import LoadMore from '../../components/loadMore';
 import './styles.scss';
 
 const Admin = () => {
@@ -19,8 +20,10 @@ const Admin = () => {
     desc: '',
   });
 
+  const { data, queryDoc, isLastPage } = products;
+
   useEffect(() => {
-    fetchProducts();
+    fetchProducts({});
   }, [fetchProducts]);
 
   const toggleModal = () => setHideModal(!hideModal);
@@ -48,6 +51,17 @@ const Admin = () => {
     e.preventDefault();
     addProduct({ ...productDetails });
     resetForm();
+  };
+
+  const handleLoadMore = () => {
+    fetchProducts({
+      startAfterDoc: queryDoc,
+      persistProducts: data,
+    });
+  };
+
+  const configLoadMore = {
+    onLoadMoreEvt: handleLoadMore,
   };
 
   return (
@@ -125,27 +139,41 @@ const Admin = () => {
                   cellSpacing='0'
                 >
                   <tbody>
-                    {products.data.map((product, idx) => {
-                      const { name, thumbnail, price, documentID } = product;
-                      return (
-                        <tr>
-                          <td>
-                            <img
-                              className='thumb'
-                              src={thumbnail}
-                              alt='productThumbnail'
-                            />
-                          </td>
-                          <td>{name}</td>
-                          <td>{price}</td>
-                          <td>
-                            <Button onClick={() => deleteProduct(documentID)}>
-                              Delete
-                            </Button>
-                          </td>
-                        </tr>
-                      );
-                    })}
+                    {Array.isArray(data) &&
+                      data.length > 0 &&
+                      data.map((product, idx) => {
+                        const { name, thumbnail, price, documentID } = product;
+                        return (
+                          <tr key={idx}>
+                            <td>
+                              <img
+                                className='thumb'
+                                src={thumbnail}
+                                alt='productThumbnail'
+                              />
+                            </td>
+                            <td>{name}</td>
+                            <td>{price}</td>
+                            <td>
+                              <Button onClick={() => deleteProduct(documentID)}>
+                                Delete
+                              </Button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <table border='0' cellPadding='0' cellSpacing='0'>
+                  <tbody>
+                    <tr>
+                      <td>{!isLastPage && <LoadMore {...configLoadMore} />}</td>
+                    </tr>
                   </tbody>
                 </table>
               </td>

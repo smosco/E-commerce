@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useProductStore from '../../zustand/productStore';
 import Product from './product';
 import FormSelect from '../forms/formSelect';
+import LoadMore from '../loadMore';
 import './styles.scss';
 
 const ProductResults = () => {
@@ -10,13 +11,15 @@ const ProductResults = () => {
   const navigate = useNavigate();
   const { filterType } = useParams();
 
+  const { data, queryDoc, isLastPage } = products;
+
   useEffect(() => {
-    fetchProducts(filterType);
+    fetchProducts({ filterType });
   }, [fetchProducts, filterType]);
 
-  if (!Array.isArray(products.data)) return null;
+  if (!Array.isArray(data)) return null;
 
-  if (products.data.length < 1) {
+  if (data.length < 1) {
     return <p>No search results.</p>;
   }
 
@@ -44,6 +47,18 @@ const ProductResults = () => {
     handleChange: handleFilter,
   };
 
+  const handleLoadMore = () => {
+    fetchProducts({
+      filterType,
+      startAfterDoc: queryDoc,
+      persistProducts: data,
+    });
+  };
+
+  const configLoadMore = {
+    onLoadMoreEvt: handleLoadMore,
+  };
+
   return (
     <div className='products'>
       <h1>Browse Products</h1>
@@ -64,6 +79,8 @@ const ProductResults = () => {
           return <Product {...configProduct} />;
         })}
       </div>
+
+      {!isLastPage && <LoadMore {...configLoadMore} />}
     </div>
   );
 };
