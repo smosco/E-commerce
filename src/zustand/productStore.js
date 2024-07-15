@@ -13,9 +13,17 @@ const useProductStore = create((set) => ({
     isLastPage: false,
   },
 
-  fetchProducts: async (filterType) => {
+  fetchProducts: async ({
+    filterType,
+    startAfterDoc = null,
+    persistProducts = [],
+  }) => {
     try {
-      const productsData = await handleFetchProducts(filterType);
+      const productsData = await handleFetchProducts({
+        filterType,
+        startAfterDoc,
+        persistProducts,
+      });
       set({
         products: productsData || {
           data: [],

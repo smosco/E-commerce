@@ -9,6 +9,8 @@ import {
   query,
   orderBy,
   where,
+  limit,
+  startAfter,
 } from 'firebase/firestore';
 
 export const handleAddProduct = async (product) => {
@@ -20,26 +22,46 @@ export const handleAddProduct = async (product) => {
   }
 };
 
-export const handleFetchProducts = async (filterType) => {
+export const handleFetchProducts = async ({
+  filterType,
+  startAfterDoc,
+  persistProducts = [],
+}) => {
+  const pageSize = 6;
+
   try {
     let productsQuery = query(
       collection(firestore, 'products'),
-      orderBy('createDate')
+      orderBy('createDate'),
+      limit(pageSize)
     );
 
     if (filterType) {
       productsQuery = query(productsQuery, where('category', '==', filterType));
     }
+    if (startAfterDoc) {
+      if (startAfterDoc) {
+        productsQuery = query(productsQuery, startAfter(startAfterDoc));
+      }
+    }
 
     const snapshot = await getDocs(productsQuery);
+    const totalCount = snapshot.size;
 
-    const data = snapshot.docs.map((doc) => ({
-      ...doc.data(),
-      documentID: doc.id,
-    }));
+    const data = [
+      ...persistProducts,
+      ...snapshot.docs.map((doc) => {
+        return {
+          ...doc.data(),
+          documentID: doc.id,
+        };
+      }),
+    ];
 
     return {
       data,
+      queryDoc: snapshot.docs[totalCount - 1],
+      isLastPage: totalCount < pageSize,
     };
   } catch (err) {
     console.error('Error fetching products: ', err);
