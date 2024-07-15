@@ -20,7 +20,7 @@ const Admin = () => {
   });
 
   useEffect(() => {
-    fetchProducts({});
+    fetchProducts();
   }, [fetchProducts]);
 
   const toggleModal = () => setHideModal(!hideModal);
