@@ -13,9 +13,26 @@ const useProductStore = create((set) => ({
     isLastPage: false,
   },
 
-  fetchProducts: async (params) => {
-    const productsData = await handleFetchProducts(params);
-    set({ products: productsData });
+  fetchProducts: async (filterType) => {
+    try {
+      const productsData = await handleFetchProducts(filterType);
+      set({
+        products: productsData || {
+          data: [],
+          queryDoc: null,
+          isLastPage: false,
+        },
+      });
+    } catch (err) {
+      console.error('Failed to fetch products:', err);
+      set({
+        products: {
+          data: [],
+          queryDoc: null,
+          isLastPage: false,
+        },
+      });
+    }
   },
 
   addProduct: async (product) => {
