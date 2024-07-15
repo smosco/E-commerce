@@ -4,6 +4,7 @@ import {
   handleFetchProducts,
   handleAddProduct,
   handleDeleteProduct,
+  handleFetchProduct,
 } from '../firebase/productUtils';
 
 const useProductStore = create((set) => ({
@@ -68,6 +69,16 @@ const useProductStore = create((set) => ({
         ),
       },
     }));
+  },
+
+  fetchProduct: async (productID) => {
+    try {
+      const product = await handleFetchProduct(productID);
+      set({ product });
+    } catch (err) {
+      console.error('Failed to fetch product:', err);
+      set({ product: null });
+    }
   },
 }));
 
