@@ -24,7 +24,7 @@ const ProductCard = () => {
     return <p>Loading...</p>;
   }
 
-  const { name, thumbnail, price } = product;
+  const { name, thumbnail, price, desc } = product;
 
   return (
     <div className='productCard'>
@@ -39,6 +39,10 @@ const ProductCard = () => {
           <li>
             <span>{price}</span>
           </li>
+          <li>
+            <span dangerouslySetInnerHTML={{ __html: desc }} />
+          </li>
+
           <li>
             <div className='addToCart'>
               <Button {...configAddToCardBtn}>Add to cart</Button>

@@ -6,6 +6,10 @@ import FormInput from '../../components/forms/formInput';
 import FormSelect from '../../components/forms/formSelect';
 import Button from '../../components/forms/button';
 import LoadMore from '../../components/loadMore';
+
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 import './styles.scss';
 
 const Admin = () => {
@@ -44,6 +48,14 @@ const Admin = () => {
     setProductDetails((prevState) => ({
       ...prevState,
       [name]: value,
+    }));
+  };
+
+  const handleEditorChange = (e, editor) => {
+    const data = editor.getData();
+    setProductDetails((prevState) => ({
+      ...prevState,
+      desc: data,
     }));
   };
 
@@ -115,6 +127,12 @@ const Admin = () => {
               step='0.01'
               value={productDetails.price}
               handleChange={handleChange}
+            />
+
+            <CKEditor
+              editor={ClassicEditor}
+              data={productDetails.desc}
+              onChange={handleEditorChange}
             />
 
             <Button type='submit'>Add product</Button>
