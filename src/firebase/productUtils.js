@@ -8,6 +8,7 @@ import {
   deleteDoc,
   query,
   orderBy,
+  where,
 } from 'firebase/firestore';
 
 export const handleAddProduct = async (product) => {
@@ -19,10 +20,16 @@ export const handleAddProduct = async (product) => {
   }
 };
 
-export const handleFetchProducts = async () => {
+export const handleFetchProducts = async (filterType) => {
   try {
-    const docRef = collection(firestore, 'products');
-    const productsQuery = query(docRef, orderBy('createDate'));
+    let productsQuery = query(
+      collection(firestore, 'products'),
+      orderBy('createDate')
+    );
+
+    if (filterType) {
+      productsQuery = query(productsQuery, where('category', '==', filterType));
+    }
 
     const snapshot = await getDocs(productsQuery);
 
