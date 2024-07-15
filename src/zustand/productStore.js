@@ -14,6 +14,8 @@ const useProductStore = create((set) => ({
     isLastPage: false,
   },
 
+  product: null,
+
   fetchProducts: async ({
     filterType,
     startAfterDoc = null,
@@ -79,6 +81,10 @@ const useProductStore = create((set) => ({
       console.error('Failed to fetch product:', err);
       set({ product: null });
     }
+  },
+
+  clearProduct: () => {
+    set({ product: null });
   },
 }));
 

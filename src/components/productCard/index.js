@@ -6,11 +6,15 @@ import Button from '../forms/button';
 
 const ProductCard = () => {
   const { productID } = useParams();
-  const { product, fetchProduct } = useProductStore();
+  const { product, fetchProduct, clearProduct } = useProductStore();
 
   useEffect(() => {
     fetchProduct(productID);
-  }, [fetchProduct, productID]);
+
+    return () => {
+      clearProduct();
+    };
+  }, [fetchProduct, productID, clearProduct]);
 
   const configAddToCardBtn = {
     type: 'button',
