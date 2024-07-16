@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../forms/button';
 import useCartStore from '../../../zustand/cartStore';
 
 const Product = (product) => {
+  const navigate = useNavigate();
   const { documentID, thumbnail, name, price } = product;
   const { addToCart } = useCartStore();
 
@@ -17,6 +18,7 @@ const Product = (product) => {
   const handleAddToCart = (product) => {
     if (!product) return;
     addToCart(product);
+    navigate('/cart');
   };
   return (
     <div className='product'>

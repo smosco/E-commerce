@@ -9,7 +9,9 @@ import useCartStore from '../../zustand/cartStore';
 
 const Header = () => {
   const { currentUser } = useUserStore();
-  const cartItemsCount = useCartStore((state) => state.cartItemsCount(state));
+  const cartItemsCount = useCartStore((state) =>
+    state.selectCartItemsCount(state)
+  );
 
   return (
     <header className='header'>

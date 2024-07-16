@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import './styles.scss';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import useProductStore from '../../zustand/productStore';
 import useCartStore from '../../zustand/cartStore';
 import Button from '../forms/button';
 
 const ProductCard = () => {
+  const navigate = useNavigate();
   const { productID } = useParams();
   const { product, fetchProduct, clearProduct } = useProductStore();
   const { addToCart } = useCartStore();
@@ -25,6 +26,7 @@ const ProductCard = () => {
   const handleAddToCart = (product) => {
     if (!product) return;
     addToCart(product);
+    navigate('/cart');
   };
 
   if (!product) {
