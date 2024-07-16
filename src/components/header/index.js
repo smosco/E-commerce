@@ -30,11 +30,15 @@ const Header = () => {
         </nav>
 
         <div className='callToActions'>
-          {currentUser && (
-            <ul>
+          <ul>
+            <li>
+              <Link>Your Cart</Link>
+            </li>
+
+            {currentUser && [
               <li>
                 <Link to='/dashboard'>My Account</Link>
-              </li>
+              </li>,
               <li>
                 <span
                   onClick={() => {
@@ -43,19 +47,18 @@ const Header = () => {
                 >
                   Logout
                 </span>
-              </li>
-            </ul>
-          )}
-          {!currentUser && (
-            <ul>
+              </li>,
+            ]}
+
+            {!currentUser && [
               <li>
                 <Link to='/registration'>Register</Link>
-              </li>
+              </li>,
               <li>
                 <Link to='/login'>Login</Link>
-              </li>
-            </ul>
-          )}
+              </li>,
+            ]}
+          </ul>
         </div>
       </div>
     </header>
