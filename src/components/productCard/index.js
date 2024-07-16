@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import './styles.scss';
 import { useParams } from 'react-router-dom';
 import useProductStore from '../../zustand/productStore';
+import useCartStore from '../../zustand/cartStore';
 import Button from '../forms/button';
 
 const ProductCard = () => {
   const { productID } = useParams();
   const { product, fetchProduct, clearProduct } = useProductStore();
+  const { addToCart } = useCartStore();
 
   useEffect(() => {
     fetchProduct(productID);
@@ -18,6 +20,11 @@ const ProductCard = () => {
 
   const configAddToCardBtn = {
     type: 'button',
+  };
+
+  const handleAddToCart = (product) => {
+    if (!product) return;
+    addToCart(product);
   };
 
   if (!product) {
@@ -45,7 +52,12 @@ const ProductCard = () => {
 
           <li>
             <div className='addToCart'>
-              <Button {...configAddToCardBtn}>Add to cart</Button>
+              <Button
+                {...configAddToCardBtn}
+                onClick={() => handleAddToCart(product)}
+              >
+                Add to cart
+              </Button>
             </div>
           </li>
         </ul>

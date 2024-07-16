@@ -1,13 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../forms/button';
+import useCartStore from '../../../zustand/cartStore';
 
-const Product = ({ documentID, thumbnail, name, price }) => {
+const Product = (product) => {
+  const { documentID, thumbnail, name, price } = product;
+  const { addToCart } = useCartStore();
+
   if (!documentID || !thumbnail || !name || typeof price === 'undefined')
     return null;
 
   const configAddToCartBtn = {
     type: 'button',
+  };
+
+  const handleAddToCart = (product) => {
+    if (!product) return;
+    addToCart(product);
   };
   return (
     <div className='product'>
@@ -28,7 +37,12 @@ const Product = ({ documentID, thumbnail, name, price }) => {
           </li>
           <li>
             <div className='addToCart'>
-              <Button {...configAddToCartBtn}>Add to cart</Button>
+              <Button
+                {...configAddToCartBtn}
+                onClick={() => handleAddToCart(product)}
+              >
+                Add to cart
+              </Button>
             </div>
           </li>
         </ul>
