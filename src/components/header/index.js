@@ -5,9 +5,11 @@ import { auth } from '../../firebase/utils';
 import useUserStore from '../../zustand/userStore';
 
 import Logo from './../../assets/logo.png';
+import useCartStore from '../../zustand/cartStore';
 
 const Header = () => {
   const { currentUser } = useUserStore();
+  const cartItemsCount = useCartStore((state) => state.cartItemsCount(state));
 
   return (
     <header className='header'>
@@ -32,7 +34,7 @@ const Header = () => {
         <div className='callToActions'>
           <ul>
             <li>
-              <Link>Your Cart</Link>
+              <Link>Your Cart ({cartItemsCount})</Link>
             </li>
 
             {currentUser && [

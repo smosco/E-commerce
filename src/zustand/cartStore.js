@@ -55,6 +55,13 @@ const useCartStore = create((set) => ({
     })),
 
   clearCart: () => set({ cartItems: [] }),
+
+  cartItemsCount: (state) =>
+    state.cartItems.reduce(
+      (accumulatedQuantity, cartItem) =>
+        accumulatedQuantity + cartItem.quantity,
+      0
+    ),
 }));
 
 export default useCartStore;
