@@ -34,7 +34,7 @@ const Header = () => {
         <div className='callToActions'>
           <ul>
             <li>
-              <Link>Your Cart ({cartItemsCount})</Link>
+              <Link to='/cart'>Your Cart ({cartItemsCount})</Link>
             </li>
 
             {currentUser && [

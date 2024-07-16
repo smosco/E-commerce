@@ -25,6 +25,7 @@ import Dashboard from './pages/dashboard';
 import Admin from './pages/admin';
 import Search from './pages/search';
 import ProductDetails from './pages/productDetails';
+import Cart from './pages/cart';
 
 import WithAuth from './hoc/WithAuth';
 import WithAdminAuth from './hoc/WithAdminAuth';
@@ -144,6 +145,14 @@ function App() {
             element={
               <MainLayout>
                 <ProductDetails />
+              </MainLayout>
+            }
+          />
+          <Route
+            path='/cart'
+            element={
+              <MainLayout>
+                <Cart />
               </MainLayout>
             }
           />
