@@ -36,15 +36,15 @@ const useCartStore = create((set) => ({
             (cartItem) => cartItem.documentID !== existingCartItem.documentID
           ),
         };
-      } else {
-        return {
-          cartItems: state.cartItems.map((cartItem) =>
-            cartItem.documentID === existingCartItem.documentID
-              ? { ...cartItem, quantity: cartItem.quantity - 1 }
-              : cartItem
-          ),
-        };
       }
+
+      return {
+        cartItems: state.cartItems.map((cartItem) =>
+          cartItem.documentID === existingCartItem.documentID
+            ? { ...cartItem, quantity: cartItem.quantity - 1 }
+            : cartItem
+        ),
+      };
     }),
 
   removeCartItem: (cartItemToRemove) =>
