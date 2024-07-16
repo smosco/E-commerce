@@ -3,7 +3,7 @@ import Checkout from '../../components/checkout';
 
 const Cart = () => {
   return (
-    <div>
+    <div className='cart'>
       <Checkout />
     </div>
   );
