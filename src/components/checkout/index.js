@@ -1,12 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import useCartStore from '../../zustand/cartStore';
 import Button from '../forms/button';
 import Item from './item';
 import './styles.scss';
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const { cartItems } = useCartStore();
-  console.log(cartItems);
+  const cartTotalPrice = useCartStore((state) =>
+    state.selectCartTotalPrice(state)
+  );
 
   return (
     <div className='checkout'>
@@ -49,7 +53,7 @@ const Checkout = () => {
                 <table align='right' border='0' cellPadding='0' cellSpacing='0'>
                   <tr align='right'>
                     <td>
-                      <h3>Total:</h3>
+                      <h3>Total:{cartTotalPrice}</h3>
                     </td>
                   </tr>
                   <tr>
@@ -57,7 +61,13 @@ const Checkout = () => {
                       <tbody>
                         <tr>
                           <td>
-                            <Button>Continue Shopping</Button>
+                            <Button
+                              onClick={() => {
+                                navigate('/search');
+                              }}
+                            >
+                              Continue Shopping
+                            </Button>
                           </td>
                           <td>
                             <Button>Checkout</Button>
