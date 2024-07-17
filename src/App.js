@@ -26,6 +26,7 @@ import Admin from './pages/admin';
 import Search from './pages/search';
 import ProductDetails from './pages/productDetails';
 import Cart from './pages/cart';
+import Payment from './pages/payment';
 
 import WithAuth from './hoc/WithAuth';
 import WithAdminAuth from './hoc/WithAdminAuth';
@@ -153,6 +154,14 @@ function App() {
             element={
               <MainLayout>
                 <Cart />
+              </MainLayout>
+            }
+          />
+          <Route
+            path='/payment'
+            element={
+              <MainLayout>
+                <Payment />
               </MainLayout>
             }
           />
