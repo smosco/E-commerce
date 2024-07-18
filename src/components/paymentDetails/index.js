@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import useUserStore from '../../zustand/userStore';
+import useCartStore from '../../zustand/cartStore';
+import useOrderStore from '../../zustand/orderStore';
+import { apiInstance } from '../../utils';
 import FormInput from '../forms/formInput';
 import Button from '../forms/button';
-import { apiInstance } from '../../utils';
-import useCartStore from '../../zustand/cartStore';
 import './styles.scss';
-import { useNavigate } from 'react-router-dom';
 
 const initialAddressState = {
-  line1: '',
-  line2: '',
-  city: '',
-  state: '',
-  postal_code: '',
+  line1: 'test',
+  line2: 'test',
+  city: 'test',
+  state: 'test',
+  postal_code: 'test',
   country: 'KR',
 };
 
@@ -22,19 +24,21 @@ const PaymentDetails = () => {
   const elements = useElements();
   const [billingAddress, setBillingAddress] = useState(initialAddressState);
   const [shippingAddress, setShippingAddress] = useState(initialAddressState);
-  const [recipientName, setRecipientName] = useState('');
-  const [nameOnCard, setNameOnCard] = useState('');
+  const [recipientName, setRecipientName] = useState('test');
+  const [nameOnCard, setNameOnCard] = useState('test');
+  const { currentUser } = useUserStore();
+  const { cartItems, clearCart } = useCartStore();
   const cartTotalPrice = useCartStore((state) =>
     state.selectCartTotalPrice(state)
   );
   const cartItemsCount = useCartStore((state) =>
     state.selectCartItemsCount(state)
   );
-  const { clearCart } = useCartStore();
+  const { saveOrder } = useOrderStore();
 
   useEffect(() => {
     if (cartItemsCount < 1) {
-      navigate('/');
+      navigate('/dashboard');
     }
   }, [navigate, cartItemsCount]);
 
@@ -67,40 +71,55 @@ const PaymentDetails = () => {
       return;
     }
 
-    apiInstance
-      .post('/payments/create', {
-        amount: cartTotalPrice * 100,
-        shipping: {
-          name: recipientName,
+    try {
+      const { data: clientSecret } = await apiInstance.post(
+        '/payments/create',
+        {
+          amount: cartTotalPrice * 100,
+          shipping: {
+            name: recipientName,
+            address: {
+              ...shippingAddress,
+            },
+          },
+        }
+      );
+
+      const { paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: CardElement,
+        billing_details: {
+          name: nameOnCard,
           address: {
-            ...shippingAddress,
+            ...billingAddress,
           },
         },
-      })
-      .then(({ data: clientSecret }) => {
-        stripe
-          .createPaymentMethod({
-            type: 'card',
-            card: CardElement,
-            billing_details: {
-              name: nameOnCard,
-              address: {
-                ...billingAddress,
-              },
-            },
-          })
-          .then(({ paymentMethod }) => {
-            stripe
-              .confirmCardPayment(clientSecret, {
-                payment_method: paymentMethod.id,
-              })
-              .then(({ paymentIntent }) => {
-                clearCart();
-              });
-          });
       });
-  };
 
+      const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: paymentMethod.id,
+      });
+
+      const configOrder = {
+        orderTotal: cartTotalPrice,
+        orderItems: cartItems.map((item) => {
+          const { documentID, thumbnail, name, price, quantity } = item;
+          return {
+            documentID,
+            thumbnail,
+            name,
+            price,
+            quantity,
+          };
+        }),
+      };
+
+      await saveOrder(configOrder, currentUser.currentUser.id);
+      clearCart();
+    } catch (error) {
+      console.error('Error processing order: ', error);
+    }
+  };
   const configCardElement = {
     iconStyle: 'solid',
     style: {
