@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   TableContainer,
   Table,
@@ -9,6 +10,7 @@ import {
 } from '@mui/material';
 
 const OrderHistory = ({ orders }) => {
+  const navigate = useNavigate();
   const columns = [
     {
       id: 'orderCreatedDate',
@@ -67,8 +69,14 @@ const OrderHistory = ({ orders }) => {
           {Array.isArray(orders) &&
             orders.length > 0 &&
             orders.map((row, pos) => {
+              const { documentID } = row;
               return (
-                <TableRow key={pos}>
+                <TableRow
+                  key={pos}
+                  onClick={() => {
+                    navigate(`/order/${documentID}`);
+                  }}
+                >
                   {columns.map((col, pos) => {
                     const columnName = col.id;
                     const columnValue = row[columnName];

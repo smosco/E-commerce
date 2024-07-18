@@ -28,6 +28,7 @@ import Search from './pages/search';
 import ProductDetails from './pages/productDetails';
 import Cart from './pages/cart';
 import Payment from './pages/payment';
+import Order from './pages/order';
 
 import WithAuth from './hoc/WithAuth';
 import WithAdminAuth from './hoc/WithAdminAuth';
@@ -165,6 +166,16 @@ function App() {
                 <MainLayout>
                   <Payment />
                 </MainLayout>
+              </WithAuth>
+            }
+          />
+          <Route
+            path='/order/:orderID'
+            element={
+              <WithAuth>
+                <DashboardLayout>
+                  <Order />
+                </DashboardLayout>
               </WithAuth>
             }
           />
