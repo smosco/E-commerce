@@ -16,6 +16,7 @@ import AdminToolbar from './components/adminToolbar';
 import MainLayout from './layouts/MainLayout';
 import HomeLayout from './layouts/HomeLayout';
 import AdminLayout from './layouts/AdminLayout';
+import DashboardLayout from './layouts/DashboardLayout';
 
 import Home from './pages/home';
 import Registration from './pages/registration';
@@ -108,9 +109,9 @@ function App() {
             path='/dashboard'
             element={
               <WithAuth>
-                <MainLayout>
+                <DashboardLayout>
                   <Dashboard />
-                </MainLayout>
+                </DashboardLayout>
               </WithAuth>
             }
           />
