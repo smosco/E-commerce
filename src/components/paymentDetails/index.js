@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import FormInput from '../forms/formInput';
 import Button from '../forms/button';
 import { apiInstance } from '../../utils';
 import useCartStore from '../../zustand/cartStore';
 import './styles.scss';
+import { useNavigate } from 'react-router-dom';
 
 const initialAddressState = {
   line1: '',
@@ -16,6 +17,7 @@ const initialAddressState = {
 };
 
 const PaymentDetails = () => {
+  const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
   const [billingAddress, setBillingAddress] = useState(initialAddressState);
@@ -25,6 +27,16 @@ const PaymentDetails = () => {
   const cartTotalPrice = useCartStore((state) =>
     state.selectCartTotalPrice(state)
   );
+  const cartItemsCount = useCartStore((state) =>
+    state.selectCartItemsCount(state)
+  );
+  const { clearCart } = useCartStore();
+
+  useEffect(() => {
+    if (cartItemsCount < 1) {
+      navigate('/');
+    }
+  }, [navigate, cartItemsCount]);
 
   const handleShipping = (e) => {
     const { name, value } = e.target;
@@ -83,7 +95,7 @@ const PaymentDetails = () => {
                 payment_method: paymentMethod.id,
               })
               .then(({ paymentIntent }) => {
-                console.log(paymentIntent);
+                clearCart();
               });
           });
       });

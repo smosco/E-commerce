@@ -70,7 +70,13 @@ const Checkout = () => {
                             </Button>
                           </td>
                           <td>
-                            <Button>Checkout</Button>
+                            <Button
+                              onClick={() => {
+                                navigate('/payment');
+                              }}
+                            >
+                              Checkout
+                            </Button>
                           </td>
                         </tr>
                       </tbody>
