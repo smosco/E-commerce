@@ -160,9 +160,11 @@ function App() {
           <Route
             path='/payment'
             element={
-              <MainLayout>
-                <Payment />
-              </MainLayout>
+              <WithAuth>
+                <MainLayout>
+                  <Payment />
+                </MainLayout>
+              </WithAuth>
             }
           />
         </Routes>
