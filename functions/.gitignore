@@ -1,2 +1,11 @@
+# Node.js 관련
 node_modules/
 *.local
+
+# Firebase 관련
+debug.log
+firebase-debug.log
+
+# 환경 변수 파일
+.env
+.runtimeconfig.json
