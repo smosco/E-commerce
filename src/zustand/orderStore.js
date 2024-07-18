@@ -4,6 +4,7 @@ import {
   collection,
   doc,
   setDoc,
+  getDoc,
   getDocs,
   query,
   orderBy,
@@ -12,6 +13,7 @@ import {
 
 const useOrderStore = create((set) => ({
   orderHistory: [],
+  orderDetails: {},
 
   fetchOrders: async (userId) => {
     try {
@@ -47,6 +49,26 @@ const useOrderStore = create((set) => ({
     } catch (err) {
       console.error('Error adding order: ', err);
     }
+  },
+
+  fetchOrderDetails: async (orderId) => {
+    try {
+      const orderRef = doc(firestore, 'orders', orderId);
+      const orderDoc = await getDoc(orderRef);
+      if (orderDoc.exists()) {
+        set({
+          orderDetails: { documentID: orderDoc.id, ...orderDoc.data() },
+        });
+      } else {
+        set({ orderDetails: null });
+      }
+    } catch (err) {
+      console.error('Failed to fetch order details:', err);
+    }
+  },
+
+  clearOrderDetails: () => {
+    set({ orderDetails: {} });
   },
 }));
 
