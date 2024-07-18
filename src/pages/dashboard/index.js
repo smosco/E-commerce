@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import useOrderStore from '../../zustand/orderStore';
+import useUserStore from '../../zustand/userStore';
+import OrderHistory from '../../components/orderHistory';
 import './styles.scss';
 
 const Dashboard = () => {
+  const { currentUser } = useUserStore();
+  const { orderHistory, fetchOrders } = useOrderStore();
+
+  useEffect(() => {
+    fetchOrders(currentUser.currentUser.id);
+  }, [fetchOrders, currentUser.currentUser.id]);
+
   return (
     <div>
-      <h1>You're logged in.</h1>
+      <h1>Order History</h1>
+
+      <OrderHistory orders={orderHistory} />
     </div>
   );
 };
