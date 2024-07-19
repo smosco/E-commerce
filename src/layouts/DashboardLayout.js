@@ -14,7 +14,7 @@ const DashboardLayout = ({ children }) => {
           <VerticalNav>
             <ul>
               <li>
-                <Link to='/dashboard'>Home</Link>
+                <Link to='/'>Home</Link>
               </li>
               <li>
                 <span className='signOut' onClick={() => {}}>

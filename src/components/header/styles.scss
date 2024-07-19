@@ -1,22 +1,19 @@
 .header {
   height: 6.5rem;
+  padding-inline: 2rem;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-}
 
-.wrap {
-  position: relative;
-  height: 100%;
-  max-width: 1450px;
-  margin: 0 auto;
+  .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+  }
 
   .logo {
     width: 13rem;
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    transform: translateY(-50%);
 
     img {
       display: block;
@@ -27,6 +24,7 @@
 
   nav {
     height: 100%;
+
     ul,
     ul li {
       padding: 0;
@@ -56,12 +54,8 @@
   }
 
   .callToActions {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
 
     ul,
     li {
