@@ -100,6 +100,7 @@ const PaymentDetails = () => {
         payment_method: paymentMethod.id,
       });
 
+      console.log(paymentIntent);
       const configOrder = {
         orderTotal: cartTotalPrice,
         orderItems: cartItems.map((item) => {
