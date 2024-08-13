@@ -1,25 +1,43 @@
 .formRow {
   display: flex;
   flex-direction: column;
-  width: 100%;
 
-  label {
-    display: block;
-    width: 100%;
-    text-align: left;
+  .formLabel {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
   }
 
-  select {
-    display: block;
-    width: auto;
-    font-size: 1.5rem;
-    line-height: 1;
-    font-weight: 400;
-    text-align: left;
-    padding: 10px 0px;
-    margin: 10px 0;
-    border: none;
+  .formSelect {
+    width: 100%;
+    max-width: 30rem;
+    padding: 1rem;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    appearance: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
     outline: none;
     cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-image: url('../../../assets/arrow.svg');
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 1rem 5px;
+
+    &:hover {
+      border-color: #007bff;
+    }
+
+    &:focus {
+      border-color: #0056b3;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    }
+
+    &::placeholder {
+      color: #888;
+    }
   }
 }

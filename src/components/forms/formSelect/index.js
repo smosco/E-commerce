@@ -12,7 +12,7 @@ const FormSelect = ({
 
   return (
     <div className='formRow'>
-      {label && <label>{label}</label>}
+      {label && <label className='formLabel'>{label}</label>}
 
       <select
         className='formSelect'
