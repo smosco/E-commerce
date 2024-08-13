@@ -18,76 +18,55 @@ const Checkout = () => {
 
       <div className='cart'>
         {cartItems.length > 0 ? (
-          <table border='0' cellPadding='0' cellSpacing='0'>
-            <tbody>
-              <tr>
-                <table
-                  className='checkoutHeader'
-                  border='0'
-                  cellPadding='0'
-                  cellSpacing='0'
-                >
-                  <tbody>
-                    <tr>
-                      <th>Product</th>
-                      <th>Description</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
-                      <th>Remove</th>
-                    </tr>
-                  </tbody>
-                </table>
-              </tr>
-
-              <tr>
-                <table border='0' cellPadding='0' cellSpacing='0'>
-                  <tbody>
-                    {cartItems.map((item, pos) => {
-                      return <Item {...item} />;
-                    })}
-                  </tbody>
-                </table>
-              </tr>
-
-              <tr>
-                <table align='right' border='0' cellPadding='0' cellSpacing='0'>
-                  <tr align='right'>
-                    <td>
-                      <h3>Total:{cartTotalPrice}</h3>
-                    </td>
-                  </tr>
-                  <tr>
-                    <table border='0' cellPadding='10' cellSpacing='0'>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <Button
-                              onClick={() => {
-                                navigate('/search');
-                              }}
-                            >
-                              Continue Shopping
-                            </Button>
-                          </td>
-                          <td>
-                            <Button
-                              onClick={() => {
-                                navigate('/payment');
-                              }}
-                            >
-                              Checkout
-                            </Button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </tr>
-                </table>
-              </tr>
-            </tbody>
-          </table>
+          <>
+            <table border='0' cellPadding='0' cellSpacing='0'>
+              <colgroup>
+                <col style={{ width: '15%' }} /> {/* Product Image */}
+                <col style={{ width: '35%' }} /> {/* Description */}
+                <col style={{ width: '20%' }} /> {/* Quantity */}
+                <col style={{ width: '15%' }} /> {/* Price */}
+                <col style={{ width: '15%' }} /> {/* Remove */}
+              </colgroup>
+              <thead>
+                <tr className='checkoutHeader'>
+                  <th>Product</th>
+                  <th>Description</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Remove</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cartItems.map((item, pos) => (
+                  <Item key={pos} {...item} />
+                ))}
+                <tr className='totalRow'>
+                  <td colSpan='4' />
+                  <td>
+                    <h3>Total: {cartTotalPrice}</h3>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div className='totalActions'>
+              <Button
+                onClick={() => {
+                  navigate('/search');
+                }}
+              >
+                Continue Shopping
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate('/payment');
+                }}
+              >
+                Checkout
+              </Button>
+            </div>
+          </>
         ) : (
-          <p>You hanve no items in your cart </p>
+          <p>You have no items in your cart.</p>
         )}
       </div>
     </div>

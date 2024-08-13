@@ -1,18 +1,18 @@
 .checkout {
   margin: 2rem auto;
+  padding: 2rem;
 
   h1 {
     display: block;
     width: 100%;
+    font-size: 28px;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #333;
   }
 
-  h1,
   p {
     text-align: center;
-  }
-
-  .checkoutHeader {
-    border-bottom: 1px solid black;
   }
 
   .cart {
@@ -21,28 +21,88 @@
 
     table {
       width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed; /* 테이블 레이아웃 고정 */
+
+      th,
+      td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        word-wrap: break-word; /* 긴 텍스트 줄바꿈 */
+      }
+
+      th {
+        font-weight: bold;
+        text-transform: uppercase;
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      td {
+        vertical-align: middle;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      .productImage {
+        width: 8rem;
+        height: 8rem;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+
+      .totalRow {
+        h3 {
+          margin: 0;
+          font-size: 2rem;
+          color: #333;
+          text-align: right;
+        }
+      }
     }
   }
 
-  .checkoutHeader,
-  .cart {
-    width: 100%;
-    text-align: left;
+  .totalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
 
-    th,
-    td {
-      width: 22%;
+    button {
+      flex: 1;
+      max-width: 20rem;
+      padding: 1rem 2rem;
     }
   }
 
   .cartItem {
     td img {
+      width: 8rem;
+      height: 8rem;
+      object-fit: cover;
+      border-radius: 4px;
       display: block;
-      width: 100%;
     }
   }
 
   .cartBtn {
     cursor: pointer;
+    padding: 5px;
+    margin: 0 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #0056b3;
+    }
+
+    &:active {
+      color: #004494;
+    }
   }
 }

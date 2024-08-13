@@ -16,42 +16,35 @@ const Item = (product) => {
   const handleAddCartItem = (product) => {
     addToCart(product);
   };
+
   return (
-    <table className='cartItem' border='0' cellSpacing='0' cellPadding='0'>
-      <tbody>
-        <tr>
-          <td>
-            <img src={thumbnail} alt={name} />
-          </td>
-          <td>{name}</td>
-          <td>
-            <span
-              className='cartBtn'
-              onClick={() => {
-                handleReduceCartItem(product);
-              }}
-            >{`<`}</span>
-            <span>{quantity}</span>
-            <span
-              className='cartBtn'
-              onClick={() => {
-                handleAddCartItem(product);
-              }}
-            >{`>`}</span>
-          </td>
-          <td>{price}</td>
-          <td align='center'>
-            <span
-              className='cartBtn'
-              onClick={() => handleRemoveCartItem(product)}
-            >
-              X
-            </span>
-          </td>
-        </tr>
-      </tbody>
-      Item
-    </table>
+    <tr className='cartItem'>
+      <td>
+        <img className='productImage' src={thumbnail} alt={name} />
+      </td>
+      <td>{name}</td>
+      <td>
+        <span
+          className='cartBtn'
+          onClick={() => {
+            handleReduceCartItem(product);
+          }}
+        >{`<`}</span>
+        <span>{quantity}</span>
+        <span
+          className='cartBtn'
+          onClick={() => {
+            handleAddCartItem(product);
+          }}
+        >{`>`}</span>
+      </td>
+      <td>{price}</td>
+      <td align='center'>
+        <span className='cartBtn' onClick={() => handleRemoveCartItem(product)}>
+          X
+        </span>
+      </td>
+    </tr>
   );
 };
 
