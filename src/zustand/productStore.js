@@ -6,6 +6,7 @@ import {
   handleDeleteProduct,
   handleFetchProduct,
 } from '../firebase/productUtils';
+import { toast } from 'react-toastify';
 
 const useProductStore = create((set) => ({
   products: {
@@ -14,7 +15,10 @@ const useProductStore = create((set) => ({
     isLastPage: false,
   },
 
-  isLoading: false, // 로딩 상태 추가
+  isLoading: false,
+  isAddingProduct: false,
+  isDeletingProduct: false,
+  errorMessage: null,
 
   product: null,
 
@@ -23,7 +27,7 @@ const useProductStore = create((set) => ({
     startAfterDoc = null,
     persistProducts = [],
   }) => {
-    set({ isLoading: true }); // 로딩 시작
+    set({ isLoading: true, errorMessage: null });
     try {
       const productsData = await handleFetchProducts({
         filterType,
@@ -36,55 +40,84 @@ const useProductStore = create((set) => ({
           queryDoc: null,
           isLastPage: false,
         },
-        isLoading: false, // 로딩 종료
+        isLoading: false,
       });
     } catch (err) {
-      console.error('Failed to fetch products:', err);
+      console.error('상품 목록을 가져오지 못했어요:', err);
       set({
         products: {
           data: [],
           queryDoc: null,
           isLastPage: false,
         },
-        isLoading: false, // 로딩 종료
+        isLoading: false,
+        errorMessage: '상품 목록을 가져오지 못했어요',
       });
+      toast.error('상품 목록을 가져오지 못했어요');
     }
   },
 
   addProduct: async (product) => {
+    set({ isAddingProduct: true, errorMessage: null });
     const timestamp = new Date();
-    await handleAddProduct({
-      ...product,
-      productAdminUserUID: auth.currentUser.uid,
-      createDate: timestamp,
-    });
-    set((state) => ({
-      products: {
-        ...state.products,
-        data: [...state.products.data, product],
-      },
-    }));
+    try {
+      await handleAddProduct({
+        ...product,
+        productAdminUserUID: auth.currentUser.uid,
+        createDate: timestamp,
+      });
+      set((state) => ({
+        products: {
+          ...state.products,
+          data: [...state.products.data, product],
+        },
+        isAddingProduct: false,
+      }));
+      toast.success('상품을 등록했어요');
+    } catch (err) {
+      console.error('상품 등록에 실패했어요:', err);
+      set({ isAddingProduct: false, errorMessage: '상품 등록에 실패했어요' });
+      toast.error('상품 등록에 실패했어요.');
+    }
   },
 
   deleteProduct: async (productId) => {
-    await handleDeleteProduct(productId);
-    set((state) => ({
-      products: {
-        ...state.products,
-        data: state.products.data.filter(
-          (product) => product.documentID !== productId
-        ),
-      },
-    }));
+    set({ isDeletingProduct: true, errorMessage: null });
+    try {
+      await handleDeleteProduct(productId);
+      set((state) => ({
+        products: {
+          ...state.products,
+          data: state.products.data.filter(
+            (product) => product.documentID !== productId
+          ),
+        },
+        isDeletingProduct: false,
+      }));
+      toast.success('상품을 삭제했어요');
+    } catch (err) {
+      console.error('상품 삭제를 실패했어요:', err);
+      set({
+        isDeletingProduct: false,
+        errorMessage: '상품 삭제를 실패했어요',
+      });
+      toast.error('상품 삭제를 실패했어요.');
+    }
   },
 
   fetchProduct: async (productID) => {
+    set({ isLoading: true, errorMessage: null });
     try {
       const product = await handleFetchProduct(productID);
-      set({ product });
+      set({ product, isLoading: false });
     } catch (err) {
-      console.error('Failed to fetch product:', err);
-      set({ product: null });
+      console.error('상품 정보를 가져오지 못했어요:', err);
+      set({
+        product: null,
+        isLoading: false,
+        errorMessage: '상품 정보를 가져오지 못했어요',
+      });
+      toast.error('상품 정보를 가져오지 못했어요.');
     }
   },
 

@@ -35,6 +35,9 @@ import WithAdminAuth from './hoc/WithAdminAuth';
 
 import './default.scss';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const { currentUser, setCurrentUser } = useUserStore();
 
@@ -181,6 +184,7 @@ function App() {
           />
         </Routes>
       </Router>
+      <ToastContainer autoClose={1000} />
     </div>
   );
 }
