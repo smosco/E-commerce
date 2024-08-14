@@ -50,8 +50,14 @@ a:hover {
   min-height: 100vh;
 }
 
-.main {
-  flex: 1;
+.adminLayout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the layout covers the full height of the viewport */
+}
+
+.mainContent {
+  flex-grow: 1; /* mainContent가 남은 공간을 차지하도록함*/
   width: 100%;
   max-width: 1450px;
   padding: 0 10px;
@@ -59,30 +65,22 @@ a:hover {
 }
 
 .controlPanel {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  padding: 3rem 0 6rem;
-  border-bottom: 1px solid #d3d3d3;
+  display: flex; /* 가용 공간을 채우도록 설정 */
+  flex-grow: 1;
+  min-height: calc(100vh - 7.6rem - 5.8rem);
 
   .sidebar {
-    flex: 0 0 25rem; /* 고정 너비 */
-    height: 100%;
+    flex: 0 0 25rem; /* 고정 넓이 */
+    min-height: 100%;
     border-right: 1px solid #d3d3d3;
   }
 
   .content {
-    flex: 1; /* 남은 공간을 차지함 */
-    padding-inline: 1rem; /* 사이드바와의 간격을 유지하기 위한 패딩 */
+    flex-grow: 1; /* 남은 공간을 모두 채우도록 설정 */
+    padding: 2rem;
+    background-color: #f4f4f4;
+    min-height: 100%;
   }
-}
-
-.adminLayout {
-  height: calc(100% - 6.5rem - 5.8rem - 3.6rem);
-}
-
-.dashboardLayout {
-  height: calc(100% - 6.5rem - 5.8rem);
 }
 
 @media only screen and (max-width: 980px) {

@@ -6,7 +6,7 @@ const HomeLayout = ({ children }) => {
   return (
     <div className='fullHeight'>
       <Header />
-      {children}
+      <main className='mainContent'>{children}</main>
       <Footer />
     </div>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { auth } from '../firebase/utils';
 
 import Header from '../components/header';
 import VerticalNav from '../components/verticalNav';
@@ -17,7 +18,14 @@ const AdminLayout = ({ children }) => {
                 <Link to='/admin'>Home</Link>
               </li>
               <li>
-                <span className='signOut'>Sign Out</span>
+                <span
+                  className='signOut'
+                  onClick={() => {
+                    auth.signOut();
+                  }}
+                >
+                  Sign Out
+                </span>
               </li>
             </ul>
           </VerticalNav>
