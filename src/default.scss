@@ -53,12 +53,13 @@ a:hover {
 .adminLayout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensures the layout covers the full height of the viewport */
+  min-height: 100vh;
 }
 
 .mainContent {
   flex-grow: 1; /* mainContent가 남은 공간을 차지하도록함*/
   width: 100%;
+  height: calc(100% - 7.6rem - 5.8rem);
   max-width: 1450px;
   padding: 0 10px;
   margin: 0 auto;
