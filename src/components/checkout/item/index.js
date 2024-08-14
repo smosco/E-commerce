@@ -1,5 +1,6 @@
 import React from 'react';
 import useCartStore from '../../../zustand/cartStore';
+import { formatPrice } from '../../../utils';
 
 const Item = (product) => {
   const { name, thumbnail, price, quantity } = product;
@@ -38,7 +39,7 @@ const Item = (product) => {
           }}
         >{`>`}</span>
       </td>
-      <td>{price}</td>
+      <td>{formatPrice(price)}원</td>
       <td align='center'>
         <span className='cartBtn' onClick={() => handleRemoveCartItem(product)}>
           X

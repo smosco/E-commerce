@@ -8,6 +8,7 @@ import LoadMore from '../../components/loadMore';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './styles.scss';
+import { formatPrice } from '../../utils';
 
 const Admin = () => {
   const { products, fetchProducts, addProduct, deleteProduct, isLoading } =
@@ -112,9 +113,9 @@ const Admin = () => {
               label='Price'
               type='number'
               name='price'
-              min='0.00'
-              max='10000.00'
-              step='0.01'
+              min='0'
+              max='10000000'
+              step='1000'
               value={productDetails.price}
               handleChange={handleChange}
             />
@@ -153,7 +154,7 @@ const Admin = () => {
                       />
                     </td>
                     <td>{name}</td>
-                    <td>{price.toLocaleString()}원</td>
+                    <td>{formatPrice(price)}원</td>
                     <td>
                       <Button onClick={() => deleteProduct(documentID)}>
                         Delete

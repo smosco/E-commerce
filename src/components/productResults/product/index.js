@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../forms/button';
 import useCartStore from '../../../zustand/cartStore';
+import { formatPrice } from '../../../utils';
 
 const Product = (product) => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const Product = (product) => {
             </span>
           </li>
           <li>
-            <span className='price'>{price}</span>
+            <span className='price'>{formatPrice(price)}원</span>
           </li>
           <li>
             <div className='addToCart'>

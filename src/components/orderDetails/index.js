@@ -10,6 +10,7 @@ import {
   Paper,
 } from '@mui/material';
 import { tableCellClasses } from '@mui/material';
+import { formatPrice } from '../../utils';
 import { styled } from '@mui/material/styles';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -44,7 +45,7 @@ const OrderDetails = ({ order }) => {
   const formatText = (columnName, columnValue) => {
     switch (columnName) {
       case 'price':
-        return `${columnValue.toLocaleString()}원`;
+        return `${formatPrice(columnValue)}원`;
       case 'thumbnail':
         return <img src={columnValue} width={200} alt='thumbnail' />;
       default:

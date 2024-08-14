@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useCartStore from '../../zustand/cartStore';
 import Button from '../forms/button';
 import Item from './item';
+import { formatPrice } from '../../utils';
 import './styles.scss';
 
 const Checkout = () => {
@@ -43,7 +44,7 @@ const Checkout = () => {
                 <tr className='totalRow'>
                   <td colSpan='4' />
                   <td>
-                    <h3>Total: {cartTotalPrice}</h3>
+                    <h3>Total: {formatPrice(cartTotalPrice)}원</h3>
                   </td>
                 </tr>
               </tbody>
