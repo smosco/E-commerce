@@ -7,23 +7,25 @@ import './styles.scss';
 const Directory = () => {
   return (
     <div className='directory'>
-      <div className='wrap'>
-        <div
-          className='item'
-          style={{
-            backgroundImage: `url(${ShopWomen})`,
-          }}
-        >
-          <Link to='/search/womens'>Shop Womens</Link>
-        </div>
-        <div
-          className='item'
-          style={{
-            backgroundImage: `url(${ShopMen})`,
-          }}
-        >
-          <Link to='/search/mens'>Shop Mens</Link>
-        </div>
+      <div
+        className='item left'
+        style={{
+          backgroundImage: `url(${ShopWomen})`,
+        }}
+      >
+        <Link to='/search/womens' className='link'>
+          Shop Womens
+        </Link>
+      </div>
+      <div
+        className='item right'
+        style={{
+          backgroundImage: `url(${ShopMen})`,
+        }}
+      >
+        <Link to='/search/mens' className='link'>
+          Shop Mens
+        </Link>
       </div>
     </div>
   );
