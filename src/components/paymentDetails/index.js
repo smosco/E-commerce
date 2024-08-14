@@ -34,7 +34,7 @@ const PaymentDetails = () => {
   const cartItemsCount = useCartStore((state) =>
     state.selectCartItemsCount(state)
   );
-  const { saveOrder } = useOrderStore();
+  const { saveOrder, isSavingOrder } = useOrderStore();
 
   useEffect(() => {
     if (cartItemsCount < 1) {
@@ -246,7 +246,9 @@ const PaymentDetails = () => {
           <CardElement options={configCardElement} />
         </div>
 
-        <Button type='submit'>Pay Now</Button>
+        <Button type='submit' disabled={isSavingOrder}>
+          {isSavingOrder ? 'Processing Order...' : 'Pay Now'}
+        </Button>
       </form>
     </div>
   );
