@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import useProductStore from '../../zustand/productStore';
 import useCartStore from '../../zustand/cartStore';
 import Button from '../forms/button';
+import { formatPrice } from '../../utils';
 
 const ProductCard = () => {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const ProductCard = () => {
             <h1>{name}</h1>
           </li>
           <li>
-            <span>{price}</span>
+            <span className='price'>{formatPrice(price)}원</span>
           </li>
           <li>
             <span dangerouslySetInnerHTML={{ __html: desc }} />

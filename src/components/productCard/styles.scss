@@ -1,37 +1,73 @@
 .productCard {
-  max-width: 80rem;
-  margin: 0 auto 10rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 4rem;
 
   .hero {
-    display: block;
-    width: 100%;
-    margin: 2rem auto;
-
+    flex: 1;
+    max-width: 50rem;
     img {
-      display: block;
       width: 100%;
-      margin: 0;
+      border-radius: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
   }
 
   .productDetails {
-    ul,
-    ul li {
+    flex: 1;
+    max-width: 60rem;
+    background-color: #fff;
+    // border-radius: 1rem;
+    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+
+    ul {
+      list-style: none;
       padding: 0;
-      margin: 0;
+
+      li {
+        margin-bottom: 2rem;
+
+        h1 {
+          font-size: 2rem;
+          margin-bottom: 1rem;
+          color: #333;
+        }
+
+        span {
+          font-size: 1.6rem; /* 글자 크기 증가 */
+          color: #666;
+          line-height: 1.6; /* line-height 추가 */
+
+          &.price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff5722;
+          }
+        }
+      }
     }
 
-    ul li {
-      list-style-type: none;
-      margin: 0 auto 1rem;
-
-      h1 {
-        margin: 0;
-      }
+    .addToCart {
+      margin-top: 2rem;
     }
   }
 
-  .addToCart {
-    max-width: 20rem;
+  // 반응형 디자인 적용
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+
+    .hero,
+    .productDetails {
+      max-width: 100%;
+    }
+
+    .productDetails {
+      padding: 20px 10px;
+    }
   }
 }
