@@ -7,7 +7,7 @@ import LoadMore from '../loadMore';
 import './styles.scss';
 
 const ProductResults = () => {
-  const { products, fetchProducts } = useProductStore();
+  const { products, fetchProducts, isLoading } = useProductStore();
   const navigate = useNavigate();
   const { filterType } = useParams();
 
@@ -57,6 +57,7 @@ const ProductResults = () => {
 
   const configLoadMore = {
     onLoadMoreEvt: handleLoadMore,
+    isLoading: isLoading,
   };
 
   return (
@@ -74,7 +75,7 @@ const ProductResults = () => {
             ...product,
           };
 
-          return <Product {...configProduct} />;
+          return <Product key={pos} {...configProduct} />;
         })}
       </div>
 

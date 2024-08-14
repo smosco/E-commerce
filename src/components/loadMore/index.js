@@ -1,8 +1,14 @@
 import React from 'react';
-import Button from '../../components/forms/button';
+import Button from '../forms/button';
 
-const LoadMore = ({ onLoadMoreEvt = () => {} }) => {
-  return <Button onClick={onLoadMoreEvt}>LoadMore</Button>;
+const LoadMore = ({ onLoadMoreEvt, isLoading }) => {
+  return (
+    <div className='loadMore'>
+      <Button onClick={onLoadMoreEvt} disabled={isLoading}>
+        {isLoading ? 'Loading...' : 'Load More'}
+      </Button>
+    </div>
+  );
 };
 
 export default LoadMore;

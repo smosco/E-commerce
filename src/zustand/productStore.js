@@ -14,6 +14,8 @@ const useProductStore = create((set) => ({
     isLastPage: false,
   },
 
+  isLoading: false, // 로딩 상태 추가
+
   product: null,
 
   fetchProducts: async ({
@@ -21,6 +23,7 @@ const useProductStore = create((set) => ({
     startAfterDoc = null,
     persistProducts = [],
   }) => {
+    set({ isLoading: true }); // 로딩 시작
     try {
       const productsData = await handleFetchProducts({
         filterType,
@@ -33,6 +36,7 @@ const useProductStore = create((set) => ({
           queryDoc: null,
           isLastPage: false,
         },
+        isLoading: false, // 로딩 종료
       });
     } catch (err) {
       console.error('Failed to fetch products:', err);
@@ -42,6 +46,7 @@ const useProductStore = create((set) => ({
           queryDoc: null,
           isLastPage: false,
         },
+        isLoading: false, // 로딩 종료
       });
     }
   },

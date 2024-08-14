@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import useProductStore from '../../zustand/productStore';
-
 import Modal from '../../components/modal';
 import FormInput from '../../components/forms/formInput';
 import FormSelect from '../../components/forms/formSelect';
 import Button from '../../components/forms/button';
 import LoadMore from '../../components/loadMore';
-
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
 import './styles.scss';
 
 const Admin = () => {
-  const { products, fetchProducts, addProduct, deleteProduct } =
+  const { products, fetchProducts, addProduct, deleteProduct, isLoading } =
     useProductStore();
   const [hideModal, setHideModal] = useState(true);
   const [productDetails, setProductDetails] = useState({
@@ -74,23 +71,19 @@ const Admin = () => {
 
   const configLoadMore = {
     onLoadMoreEvt: handleLoadMore,
+    isLoading: isLoading,
   };
 
   return (
     <div className='admin'>
       <div className='callToActions'>
-        <ul>
-          <li>
-            <Button onClick={toggleModal}>Add new product</Button>
-          </li>
-        </ul>
+        <Button onClick={toggleModal}>Add new product</Button>
       </div>
 
       <Modal hideModal={hideModal} toggleModal={toggleModal}>
         <div className='addNewProductForm'>
           <form onSubmit={handleSubmit}>
             <h2>Add new product</h2>
-
             <FormSelect
               label='Category'
               name='category'
@@ -101,7 +94,6 @@ const Admin = () => {
               value={productDetails.category}
               handleChange={handleChange}
             />
-
             <FormInput
               label='Name'
               type='text'
@@ -109,7 +101,6 @@ const Admin = () => {
               value={productDetails.name}
               handleChange={handleChange}
             />
-
             <FormInput
               label='Main image URL'
               type='url'
@@ -117,7 +108,6 @@ const Admin = () => {
               value={productDetails.thumbnail}
               handleChange={handleChange}
             />
-
             <FormInput
               label='Price'
               type='number'
@@ -128,76 +118,60 @@ const Admin = () => {
               value={productDetails.price}
               handleChange={handleChange}
             />
-
             <CKEditor
               editor={ClassicEditor}
               data={productDetails.desc}
               onChange={handleEditorChange}
             />
-
             <Button type='submit'>Add product</Button>
           </form>
         </div>
       </Modal>
 
       <div className='manageProducts'>
-        <table border='0' cellpadding='0' cellSpacing='0'>
+        <h1>Manage Products</h1>
+        <table className='productTable'>
+          <thead>
+            <tr>
+              <th>Thumbnail</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr>
-              <th>
-                <h1>Manage Products</h1>
-              </th>
-            </tr>
-            <tr>
-              <td>
-                <table
-                  className='results'
-                  border='0'
-                  cellpadding='0'
-                  cellSpacing='0'
-                >
-                  <tbody>
-                    {Array.isArray(data) &&
-                      data.length > 0 &&
-                      data.map((product, idx) => {
-                        const { name, thumbnail, price, documentID } = product;
-                        return (
-                          <tr key={idx}>
-                            <td>
-                              <img
-                                className='thumb'
-                                src={thumbnail}
-                                alt='productThumbnail'
-                              />
-                            </td>
-                            <td>{name}</td>
-                            <td>{price}</td>
-                            <td>
-                              <Button onClick={() => deleteProduct(documentID)}>
-                                Delete
-                              </Button>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <table border='0' cellPadding='0' cellSpacing='0'>
-                  <tbody>
-                    <tr>
-                      <td>{!isLastPage && <LoadMore {...configLoadMore} />}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
+            {Array.isArray(data) && data.length > 0 ? (
+              data.map((product, idx) => {
+                const { name, thumbnail, price, documentID } = product;
+                return (
+                  <tr key={idx}>
+                    <td>
+                      <img
+                        className='thumb'
+                        src={thumbnail}
+                        alt='productThumbnail'
+                      />
+                    </td>
+                    <td>{name}</td>
+                    <td>{price.toLocaleString()}원</td>
+                    <td>
+                      <Button onClick={() => deleteProduct(documentID)}>
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colSpan='4'>No products found</td>
+              </tr>
+            )}
           </tbody>
         </table>
+        <div className='loadMore'>
+          {!isLastPage && <LoadMore {...configLoadMore} />}
+        </div>
       </div>
     </div>
   );
