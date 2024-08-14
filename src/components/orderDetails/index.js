@@ -7,42 +7,46 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Paper,
 } from '@mui/material';
+import { tableCellClasses } from '@mui/material';
+import { styled } from '@mui/material/styles';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.common.white,
+    fontSize: 18,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 16,
+    padding: '16px',
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+}));
 
 const OrderDetails = ({ order }) => {
   const orderItems = order && order.orderItems;
   const { clearOrderDetails } = useOrderStore();
-  const columns = [
-    {
-      id: 'thumbnail',
-      lable: '',
-    },
-    {
-      id: 'name',
-      lable: 'Name',
-    },
-    {
-      id: 'price',
-      lable: 'Price',
-    },
-    {
-      id: 'quantity',
-      lable: 'Quantity',
-    },
-  ];
 
-  const styles = {
-    fontSize: '16px',
-    width: '10%',
-  };
+  const columns = [
+    { id: 'thumbnail', label: '' },
+    { id: 'name', label: 'Name' },
+    { id: 'price', label: 'Price' },
+    { id: 'quantity', label: 'Quantity' },
+  ];
 
   const formatText = (columnName, columnValue) => {
     switch (columnName) {
       case 'price':
-        return `${columnValue}`;
+        return `${columnValue.toLocaleString()}원`;
       case 'thumbnail':
-        return <img src={columnValue} width={250} alt='thumbnail' />;
-
+        return <img src={columnValue} width={200} alt='thumbnail' />;
       default:
         return columnValue;
     }
@@ -55,39 +59,32 @@ const OrderDetails = ({ order }) => {
   }, [clearOrderDetails]);
 
   return (
-    <TableContainer>
+    <TableContainer component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
-            {columns.map((col, pos) => {
-              return (
-                <TableCell key={pos} style={styles}>
-                  {col.lable}
-                </TableCell>
-              );
-            })}
+            {columns.map((col) => (
+              <StyledTableCell key={col.id}>{col.label}</StyledTableCell>
+            ))}
           </TableRow>
         </TableHead>
 
         <TableBody>
           {Array.isArray(orderItems) &&
             orderItems.length > 0 &&
-            orderItems.map((row, pos) => {
-              return (
-                <TableRow key={pos}>
-                  {columns.map((col, pos) => {
-                    const columnName = col.id;
-                    const columnValue = row[columnName];
-
-                    return (
-                      <TableCell key={pos} style={styles}>
-                        {formatText(columnName, columnValue)}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
+            orderItems.map((row, idx) => (
+              <StyledTableRow key={idx}>
+                {columns.map((col) => {
+                  const columnName = col.id;
+                  const columnValue = row[columnName];
+                  return (
+                    <StyledTableCell key={col.id}>
+                      {formatText(columnName, columnValue)}
+                    </StyledTableCell>
+                  );
+                })}
+              </StyledTableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>
