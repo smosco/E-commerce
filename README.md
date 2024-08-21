@@ -45,7 +45,7 @@
 ├── firebase.json
 ├── README.md
 ├── package.json
-├── package-lock.json```
+├── package-lock.json
 
 
 ## 📦 설치 및 실행
