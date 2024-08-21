@@ -10,11 +10,11 @@ import Button from '../forms/button';
 import './styles.scss';
 
 const initialAddressState = {
-  line1: 'test',
-  line2: 'test',
-  city: 'test',
-  state: 'test',
-  postal_code: 'test',
+  line1: '서울특별시 중구 세종대로 110',
+  line2: '20층',
+  city: '서울',
+  state: '서울특별시',
+  postal_code: '04520',
   country: 'KR',
 };
 
@@ -24,8 +24,8 @@ const PaymentDetails = () => {
   const elements = useElements();
   const [billingAddress, setBillingAddress] = useState(initialAddressState);
   const [shippingAddress, setShippingAddress] = useState(initialAddressState);
-  const [recipientName, setRecipientName] = useState('test');
-  const [nameOnCard, setNameOnCard] = useState('test');
+  const [recipientName, setRecipientName] = useState('홍길동');
+  const [nameOnCard, setNameOnCard] = useState('홍길동');
   const { currentUser } = useUserStore();
   const { cartItems, clearCart } = useCartStore();
   const cartTotalPrice = useCartStore((state) =>
