@@ -24,16 +24,29 @@
 
 ## 📂 프로젝트 구조
 ```bash
-├── src
-│   ├── components
-│   ├── hooks
-│   ├── pages
-│   ├── styles
-│   └── utils
+├── functions
 ├── public
+├── src
+│   ├── assets
+│   ├── components
+│   ├── firebase
+│   ├── hoc
+│   ├── hooks
+│   ├── layouts
+│   ├── pages
+│   ├── stripe
+│   ├── utils
+│   └── zustand
+├── App.js
+├── default.scss
+├── index.js
+├── .firebaserc
+├── .gitignore
 ├── firebase.json
-└── .env
-```
+├── README.md
+├── package.json
+├── package-lock.json```
+
 
 ## 📦 설치 및 실행
 
