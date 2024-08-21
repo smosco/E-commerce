@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+아래는 설치 및 실행 부분도 마크다운으로 수정한 최종 버전입니다. 모든 코드 블록과 항목들이 마크다운 형식에 맞춰 작성되었습니다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```markdown
+# 🛍️ E-commerce 패션 웹사이트
 
-## Available Scripts
+**Firebase와 Stripe를 활용한 패션 이커머스 웹 애플리케이션**
 
-In the project directory, you can run:
+## 🌟 소개
+이 프로젝트는 Firebase를 기반으로 한 서버리스 패션 쇼핑몰 웹 애플리케이션입니다. 사용자 인증, 결제 시스템, 제품 관리 등의 기능을 제공하여 사용자가 편리하게 쇼핑할 수 있는 환경을 구축하였습니다.
 
-### `npm start`
+## 🔧 주요 기능
+- **사용자 인증**: Firebase Authentication을 사용하여 이메일 및 Google 로그인을 구현
+- **제품 관리**: Firestore를 이용해 제품 추가, 삭제, 조회 기능 제공
+- **장바구니**: Zustand를 사용하여 장바구니 상태를 관리하고, 로컬 스토리지에 데이터를 저장하여 일관된 사용자 경험 제공
+- **결제 시스템**: Stripe 결제 시스템을 Firebase Functions와 연동하여 안전한 결제 처리
+- **페이지네이션 및 검색 필터**: 제품 검색 및 카테고리 필터링 기능 구현
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️ 기술 스택
+- **프론트엔드**: React, TypeScript, Zustand, Sass
+- **백엔드 & 데이터베이스**: Firebase (Authentication, Firestore, Functions)
+- **결제 시스템**: Stripe API
+- **상태 관리**: Zustand
+- **UI 라이브러리**: MUI (Material-UI)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 배포 링크
+[E-commerce 웹사이트](https://ecommerce-website-4a792.web.app/)
 
-### `npm test`
+## 📂 프로젝트 구조
+```bash
+├── src
+│   ├── components
+│   ├── hooks
+│   ├── pages
+│   ├── styles
+│   └── utils
+├── public
+├── firebase.json
+└── .env
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📦 설치 및 실행
 
-### `npm run build`
+1. **이 리포지토리 클론**
+    ```bash
+    git clone https://github.com/smosco/ecommerce.git
+    ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **의존성 설치**
+    ```bash
+    npm install
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3. **프로젝트 실행**
+    ```bash
+    npm start
+    ```
