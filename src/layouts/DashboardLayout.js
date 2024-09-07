@@ -15,7 +15,7 @@ const DashboardLayout = ({ children }) => {
           <VerticalNav>
             <ul>
               <li>
-                <Link to='/'>Home</Link>
+                <Link to='/'>홈</Link>
               </li>
               <li>
                 <span
@@ -24,7 +24,7 @@ const DashboardLayout = ({ children }) => {
                     auth.signOut();
                   }}
                 >
-                  Sign Out
+                  로그아웃
                 </span>
               </li>
             </ul>

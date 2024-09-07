@@ -15,7 +15,7 @@ const AdminLayout = ({ children }) => {
           <VerticalNav>
             <ul>
               <li>
-                <Link to='/admin'>Home</Link>
+                <Link to='/'>홈</Link>
               </li>
               <li>
                 <span
@@ -24,7 +24,7 @@ const AdminLayout = ({ children }) => {
                     auth.signOut();
                   }}
                 >
-                  Sign Out
+                  로그아웃
                 </span>
               </li>
             </ul>
