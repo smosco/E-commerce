@@ -57,12 +57,12 @@ const Product = (product) => {
             )}
           </li>
           <li>
-            <div className='addToCart'>
+            <div className='addToCartBtnContainer'>
               <Button
                 {...configAddToCartBtn}
                 onClick={() => handleAddToCart(product)}
               >
-                Add to cart
+                장바구니에 추가
               </Button>
             </div>
           </li>

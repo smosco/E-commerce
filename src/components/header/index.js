@@ -25,10 +25,10 @@ const Header = () => {
         <nav>
           <ul>
             <li>
-              <Link to='/'>Home</Link>
+              <Link to='/'>홈</Link>
             </li>
             <li>
-              <Link to='/search'>Search</Link>
+              <Link to='/search'>검색</Link>
             </li>
           </ul>
         </nav>
@@ -36,12 +36,12 @@ const Header = () => {
         <div className='callToActions'>
           <ul>
             <li>
-              <Link to='/cart'>Your Cart ({cartItemsCount})</Link>
+              <Link to='/cart'>장바구니({cartItemsCount})</Link>
             </li>
 
             {currentUser && [
               <li>
-                <Link to='/dashboard'>My Account</Link>
+                <Link to='/dashboard'>마이페이지</Link>
               </li>,
               <li>
                 <span
@@ -49,7 +49,7 @@ const Header = () => {
                     auth.signOut();
                   }}
                 >
-                  Logout
+                  로그아웃
                 </span>
               </li>,
             ]}

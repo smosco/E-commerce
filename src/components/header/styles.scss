@@ -3,6 +3,8 @@
   border-bottom: 1px solid #ddd;
   padding: 1rem 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 1.6rem;
+  font-weight: 600;
 
   .wrap {
     max-width: 145rem;
@@ -27,7 +29,6 @@
         a {
           text-decoration: none;
           color: #333;
-          font-weight: 500;
           transition: color 0.3s;
 
           &:hover {
@@ -49,7 +50,6 @@
         span {
           text-decoration: none;
           color: #333;
-          font-weight: 500;
           cursor: pointer;
           transition: color 0.3s;
 
