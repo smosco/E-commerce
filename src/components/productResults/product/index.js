@@ -28,6 +28,9 @@ const Product = (product) => {
       ? Math.round(((price - discountPrice) / price) * 100)
       : 0;
 
+  // 할인가가 원가보다 저렴하지 않으면 세일 정보를 무시
+  const isValidSale = onSale && discountPrice && discountPrice < price;
+
   return (
     <div className='product'>
       <div className='thumb'>
@@ -44,8 +47,8 @@ const Product = (product) => {
             </span>
           </li>
           <li>
-            {/* 가격 표시: 세일 중일 경우 원가와 할인가를 표시 */}
-            {onSale && discountPrice ? (
+            {/* 유효한 세일일 경우만 할인가 표시, 그렇지 않으면 정가만 표시 */}
+            {isValidSale ? (
               <div className='priceContainer'>
                 <span className='discountPercent'>{discountPercent}%</span>
                 <span className='discountPrice'>
