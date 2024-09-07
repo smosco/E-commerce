@@ -32,7 +32,7 @@ const SignUp = () => {
     const { displayName, email, password, confirmPassword } = formState;
 
     if (password !== confirmPassword) {
-      const err = ["Password Don't match"];
+      const err = ['비밀번호가 일치하지 않아요!'];
       setFormState((prev) => ({
         ...prev,
         errors: err,
@@ -60,14 +60,14 @@ const SignUp = () => {
   };
 
   const configAuthWrapper = {
-    headline: 'Registration',
+    headline: '회원가입',
   };
 
   return (
     <AuthWrapper {...configAuthWrapper}>
       <div className='formWrap'>
         {formState.errors.length > 0 && (
-          <ul>
+          <ul className='errorMessages'>
             {formState.errors.map((err, idx) => {
               return <li key={idx}>{err}</li>;
             })}
@@ -79,32 +79,32 @@ const SignUp = () => {
             type='text'
             name='displayName'
             value={formState.displayName}
-            placeholder='Full Name'
+            placeholder='아이디'
             handleChange={handleChange}
           />
           <FormInput
             type='email'
             name='email'
             value={formState.email}
-            placeholder='Email'
+            placeholder='이메일'
             handleChange={handleChange}
           />
           <FormInput
             type='password'
             name='password'
             value={formState.password}
-            placeholder='Password'
+            placeholder='비밀번호'
             handleChange={handleChange}
           />
           <FormInput
             type='password'
             name='confirmPassword'
             value={formState.confirmPassword}
-            placeholder='Confirm Password'
+            placeholder='비밀번호 확인'
             handleChange={handleChange}
           />
 
-          <Button type='submit'>Register</Button>
+          <Button type='submit'>회원가입</Button>
         </form>
       </div>
     </AuthWrapper>

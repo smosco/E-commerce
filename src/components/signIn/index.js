@@ -45,7 +45,7 @@ const SignIn = () => {
   };
 
   const configAuthWrapper = {
-    headline: 'Login',
+    headline: '로그인',
   };
 
   return (
@@ -56,26 +56,26 @@ const SignIn = () => {
             type='email'
             name='email'
             value={formData.email}
-            placeholder='Email'
+            placeholder='이메일'
             handleChange={handleChange}
           />
           <FormInput
             type='password'
             name='password'
             value={formData.password}
-            placeholder='Password'
+            placeholder='비밀번호'
             handleChange={handleChange}
           />
-          <Button type='submit'>LogIn</Button>
+          <Button type='submit'>로그인</Button>
 
           <div className='socialSignin'>
             <div className='row'>
-              <Button onClick={signInWithGoogle}>Sign in with Google</Button>
+              <Button onClick={signInWithGoogle}>구글 로그인</Button>
             </div>
           </div>
 
-          <div className='links'>
-            <Link to='/recovery'>Reset Password</Link>
+          <div className='resetPassword'>
+            <Link to='/recovery'>비밀번호 변경</Link>
           </div>
         </form>
       </div>
