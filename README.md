@@ -23,7 +23,7 @@
 - **UI 라이브러리**: MUI (Material-UI)
 
 ## 🚀 배포 링크
-[E-commerce 웹사이트](https://ecommerce-website-4a792.web.app/)
+[SMOSCOMMERCE 웹사이트](https://ecommerce-website-4a792.web.app/)
 
 ## 📂 프로젝트 구조
 ```bash
