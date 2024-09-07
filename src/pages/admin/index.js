@@ -20,6 +20,8 @@ const Admin = () => {
     thumbnail: '',
     price: 0,
     desc: '',
+    onSale: false,
+    discountPrice: 0,
   });
 
   const { data, queryDoc, isLastPage } = products;
@@ -38,14 +40,16 @@ const Admin = () => {
       thumbnail: '',
       price: 0,
       desc: '',
+      onSale: false,
+      discountPrice: 0,
     });
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setProductDetails((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
@@ -78,55 +82,83 @@ const Admin = () => {
   return (
     <div className='admin'>
       <div className='callToActions'>
-        <Button onClick={toggleModal}>Add new product</Button>
+        <Button onClick={toggleModal}>상품 등록</Button>
       </div>
 
       <Modal hideModal={hideModal} toggleModal={toggleModal}>
-        <div className='addNewProductForm'>
-          <form onSubmit={handleSubmit}>
-            <h2>Add new product</h2>
-            <FormSelect
-              label='Category'
-              name='category'
-              options={[
-                { value: 'mens', name: 'Mens' },
-                { value: 'womens', name: 'Womens' },
-              ]}
-              value={productDetails.category}
-              handleChange={handleChange}
-            />
+        <form className='addNewProduct' onSubmit={handleSubmit}>
+          <h2>상품 등록</h2>
+
+          <FormSelect
+            label='카테고리'
+            name='category'
+            options={[
+              { value: 'mens', name: 'Mens' },
+              { value: 'womens', name: 'Womens' },
+            ]}
+            value={productDetails.category}
+            handleChange={handleChange}
+          />
+          <FormInput
+            label='상품명'
+            type='text'
+            name='name'
+            value={productDetails.name}
+            handleChange={handleChange}
+          />
+          <FormInput
+            label='상품 이미지'
+            type='url'
+            name='thumbnail'
+            value={productDetails.thumbnail}
+            handleChange={handleChange}
+          />
+          <FormInput
+            label='상품 가격'
+            type='number'
+            name='price'
+            min='0'
+            max='10000000'
+            step='1000'
+            value={productDetails.price}
+            handleChange={handleChange}
+          />
+          {/* On Sale 체크박스 */}
+          <FormInput
+            label='할인 여부'
+            type='checkbox'
+            name='onSale'
+            checked={productDetails.onSale}
+            handleChange={(e) =>
+              setProductDetails((prevState) => ({
+                ...prevState,
+                onSale: e.target.checked,
+              }))
+            }
+          />
+          {/* 할인 가격 필드 (세일 중일 때만 표시) */}
+          {productDetails.onSale && (
             <FormInput
-              label='Name'
-              type='text'
-              name='name'
-              value={productDetails.name}
-              handleChange={handleChange}
-            />
-            <FormInput
-              label='Main image URL'
-              type='url'
-              name='thumbnail'
-              value={productDetails.thumbnail}
-              handleChange={handleChange}
-            />
-            <FormInput
-              label='Price'
+              label='할인 가격'
               type='number'
-              name='price'
+              name='discountPrice'
               min='0'
               max='10000000'
               step='1000'
-              value={productDetails.price}
+              value={productDetails.discountPrice}
               handleChange={handleChange}
             />
-            <CKEditor
-              editor={ClassicEditor}
-              data={productDetails.desc}
-              onChange={handleEditorChange}
-            />
-            <Button type='submit'>Add product</Button>
-          </form>
-        </div>
+          )}
+          <CKEditor
+            editor={ClassicEditor}
+            data={productDetails.desc}
+            onChange={handleEditorChange}
+            config={{
+              initialData: '<p>상품 설명을 작성해주세요.</p>',
+            }}
+          />
+          <Button type='submit'>Add product</Button>
+        </form>
       </Modal>
 
       <div className='manageProducts'>

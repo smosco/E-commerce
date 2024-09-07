@@ -6,6 +6,12 @@
     margin-bottom: 1.5rem;
   }
 
+  .addNewProduct {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
   .manageProducts {
     h1 {
       margin-bottom: 1.5rem;

@@ -24,13 +24,13 @@
     -moz-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     background-color: white;
+    border-radius: 1.6rem;
+    padding: 4rem 3rem;
     width: 95%;
-    padding: 2rem;
-    max-width: 60rem;
     height: auto;
-    min-height: 40rem;
+    max-width: 60rem;
+    max-height: 90vh;
     pointer-events: all;
-    max-height: 95vh;
     overflow: auto;
   }
 }
