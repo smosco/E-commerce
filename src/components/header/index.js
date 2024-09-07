@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { auth } from '../../firebase/utils';
 import useUserStore from '../../zustand/userStore';
 
-import Logo from './../../assets/logo.png';
 import useCartStore from '../../zustand/cartStore';
 
 const Header = () => {
@@ -17,9 +16,7 @@ const Header = () => {
     <header className='header'>
       <div className='wrap'>
         <div className='logo'>
-          <Link to='/'>
-            <img src={Logo} alt='SMOSCO LOGO' />
-          </Link>
+          <Link to='/'>SMOSCOMMERCE</Link>
         </div>
 
         <nav>
@@ -56,10 +53,10 @@ const Header = () => {
 
             {!currentUser && [
               <li>
-                <Link to='/registration'>Register</Link>
+                <Link to='/registration'>회원가입</Link>
               </li>,
               <li>
-                <Link to='/login'>Login</Link>
+                <Link to='/login'>로그인</Link>
               </li>,
             ]}
           </ul>

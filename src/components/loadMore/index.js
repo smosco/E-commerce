@@ -5,7 +5,7 @@ const LoadMore = ({ onLoadMoreEvt, isLoading }) => {
   return (
     <div className='loadMore'>
       <Button onClick={onLoadMoreEvt} disabled={isLoading}>
-        {isLoading ? 'Loading...' : 'Load More'}
+        {isLoading ? '로딩중...' : '더보기'}
       </Button>
     </div>
   );
