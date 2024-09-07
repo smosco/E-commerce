@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ShopMen from '../../assets/shopMens.webp';
-import ShopWomen from '../../assets/shopWomens.webp';
+import ShopMen from '../../assets/shopMens.jpeg';
+import ShopWomen from '../../assets/shopWomens.jpeg';
 import './styles.scss';
 
 const Directory = () => {
