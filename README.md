@@ -1,4 +1,4 @@
-# 🛍️ E-commerce 패션 웹사이트
+# 🛍️ SMOSCOMMERCE 패션 웹사이트
 
 **Firebase와 Stripe를 활용한 패션 이커머스 웹 애플리케이션**
 
