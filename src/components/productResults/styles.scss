@@ -3,12 +3,6 @@
   padding: 2rem;
   text-align: center;
 
-  h1 {
-    font-size: 3.2rem;
-    color: #333;
-    margin-bottom: 2rem;
-  }
-
   .form-select {
     margin-bottom: 2rem;
   }
@@ -98,4 +92,10 @@
       }
     }
   }
+}
+
+.noProductMessage {
+  font-size: 1.6rem;
+  margin-top: 4rem;
+  text-align: center;
 }

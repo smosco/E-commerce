@@ -15,7 +15,7 @@ const Checkout = () => {
 
   return (
     <div className='checkout'>
-      <h1>Checkout</h1>
+      <h1>장바구니</h1>
 
       <div className='cart'>
         {cartItems.length > 0 ? (
@@ -30,11 +30,11 @@ const Checkout = () => {
               </colgroup>
               <thead>
                 <tr className='checkoutHeader'>
-                  <th>Product</th>
-                  <th>Description</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>Remove</th>
+                  <th>이미지</th>
+                  <th>상품명</th>
+                  <th>수량</th>
+                  <th>가격</th>
+                  <th>삭제</th>
                 </tr>
               </thead>
               <tbody>
@@ -44,7 +44,7 @@ const Checkout = () => {
                 <tr className='totalRow'>
                   <td colSpan='4' />
                   <td>
-                    <h3>Total: {formatPrice(cartTotalPrice)}원</h3>
+                    <p>총합계: {formatPrice(cartTotalPrice)}원</p>
                   </td>
                 </tr>
               </tbody>
@@ -55,19 +55,19 @@ const Checkout = () => {
                   navigate('/search');
                 }}
               >
-                Continue Shopping
+                계속 쇼핑하기
               </Button>
               <Button
                 onClick={() => {
                   navigate('/payment');
                 }}
               >
-                Checkout
+                구매
               </Button>
             </div>
           </>
         ) : (
-          <p>You have no items in your cart.</p>
+          <p className='noItemMessage'>장바구니에 상품이 없어요!</p>
         )}
       </div>
     </div>

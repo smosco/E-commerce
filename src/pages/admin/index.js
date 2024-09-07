@@ -93,8 +93,8 @@ const Admin = () => {
             label='카테고리'
             name='category'
             options={[
-              { value: 'mens', name: 'Mens' },
-              { value: 'womens', name: 'Womens' },
+              { value: 'mens', name: '남성' },
+              { value: 'womens', name: '여성' },
             ]}
             value={productDetails.category}
             handleChange={handleChange}
@@ -162,14 +162,14 @@ const Admin = () => {
       </Modal>
 
       <div className='manageProducts'>
-        <h1>Manage Products</h1>
+        <h1>상품관리</h1>
         <table className='productTable'>
           <thead>
             <tr>
-              <th>Thumbnail</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Actions</th>
+              <th>이미지</th>
+              <th>상품명</th>
+              <th>가격</th>
+              <th>수정</th>
             </tr>
           </thead>
           <tbody>
@@ -189,7 +189,7 @@ const Admin = () => {
                     <td>{formatPrice(price)}원</td>
                     <td>
                       <Button onClick={() => deleteProduct(documentID)}>
-                        Delete
+                        삭제
                       </Button>
                     </td>
                   </tr>
@@ -197,7 +197,7 @@ const Admin = () => {
               })
             ) : (
               <tr>
-                <td colSpan='4'>No products found</td>
+                <td colSpan='4'>등록된 상품이 없습니다.</td>
               </tr>
             )}
           </tbody>

@@ -17,6 +17,6 @@ export const formatPrice = (price) => {
   } else if (typeof price === 'string') {
     return parseInt(price).toLocaleString('ko-KR');
   } else {
-    return '가격 정보 없음';
+    return '0';
   }
 };

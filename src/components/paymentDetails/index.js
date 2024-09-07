@@ -135,7 +135,7 @@ const PaymentDetails = () => {
     <div className='paymentDetails'>
       <form onSubmit={handleFormSubmit}>
         <div className='group'>
-          <h2>Shipping Address</h2>
+          <h2>배송지 주소</h2>
 
           <FormInput
             required
@@ -188,7 +188,7 @@ const PaymentDetails = () => {
         </div>
 
         <div className='group'>
-          <h2>Billing Address</h2>
+          <h2>청구서 주소</h2>
 
           <FormInput
             required
@@ -241,13 +241,12 @@ const PaymentDetails = () => {
         </div>
 
         <div className='group'>
-          <h2>Card Details</h2>
-
-          <CardElement options={configCardElement} />
+          <h2>카드 정보</h2>
+          <CardElement options={configCardElement} className='cardElement' />
         </div>
 
         <Button type='submit' disabled={isSavingOrder}>
-          {isSavingOrder ? 'Processing Order...' : 'Pay Now'}
+          {isSavingOrder ? '결제 처리중...' : '결제하기'}
         </Button>
       </form>
     </div>

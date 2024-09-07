@@ -13,9 +13,8 @@ const Dashboard = () => {
   }, [fetchOrders, currentUser.currentUser.id]);
 
   return (
-    <div>
-      <h1>Order History</h1>
-
+    <div className='dashboard'>
+      <h1>주문 목록</h1>
       <OrderHistory orders={orderHistory} />
     </div>
   );

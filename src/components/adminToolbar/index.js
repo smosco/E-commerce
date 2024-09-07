@@ -14,7 +14,7 @@ const AdminToolbar = () => {
     <div className='adminToolbar'>
       <ul>
         <li>
-          <Link to='/admin'>My admin</Link>
+          <Link to='/admin'>관리자</Link>
         </li>
       </ul>
     </div>

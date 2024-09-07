@@ -36,10 +36,10 @@ const OrderDetails = ({ order }) => {
   const { clearOrderDetails } = useOrderStore();
 
   const columns = [
-    { id: 'thumbnail', label: '' },
-    { id: 'name', label: 'Name' },
-    { id: 'price', label: 'Price' },
-    { id: 'quantity', label: 'Quantity' },
+    { id: 'thumbnail', label: '이미지' },
+    { id: 'name', label: '상품명' },
+    { id: 'price', label: '가격' },
+    { id: 'quantity', label: '수량' },
   ];
 
   const formatText = (columnName, columnValue) => {

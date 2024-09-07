@@ -20,7 +20,7 @@ const ProductResults = () => {
   if (!Array.isArray(data)) return null;
 
   if (data.length < 1) {
-    return <p>No search results.</p>;
+    return <p className='noProductMessage'>상품이 없어요!</p>;
   }
 
   const handleFilter = (e) => {
@@ -32,15 +32,15 @@ const ProductResults = () => {
     defaultValue: filterType,
     options: [
       {
-        name: 'Show all',
+        name: '전체',
         value: '',
       },
       {
-        name: 'Mens',
+        name: '남성',
         value: 'mens',
       },
       {
-        name: 'Womens',
+        name: '여성',
         value: 'womens',
       },
     ],
@@ -62,8 +62,6 @@ const ProductResults = () => {
 
   return (
     <div className='products'>
-      <h1>Browse Products</h1>
-
       <FormSelect {...configFilters} />
 
       <div className='wrap'>

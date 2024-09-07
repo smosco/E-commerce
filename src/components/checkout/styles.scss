@@ -20,6 +20,7 @@
     margin: 0 auto;
 
     table {
+      font-size: 1.6rem;
       width: 100%;
       border-collapse: collapse;
       table-layout: fixed; /* 테이블 레이아웃 고정 */
@@ -55,11 +56,10 @@
       }
 
       .totalRow {
-        h3 {
-          margin: 0;
-          font-size: 2rem;
-          color: #333;
+        td {
           text-align: right;
+          padding: 1rem;
+          white-space: nowrap;
         }
       }
     }
@@ -104,5 +104,9 @@
     &:active {
       color: #004494;
     }
+  }
+
+  .noItemMessage {
+    font-size: 1.4rem;
   }
 }

@@ -27,7 +27,7 @@ export const handleFetchProducts = async ({
   startAfterDoc,
   persistProducts = [],
 }) => {
-  const pageSize = 6;
+  const pageSize = 8;
 
   try {
     let productsQuery = query(

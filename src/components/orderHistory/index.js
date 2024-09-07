@@ -34,9 +34,9 @@ const OrderHistory = ({ orders }) => {
   const navigate = useNavigate();
 
   const columns = [
-    { id: 'orderCreatedDate', label: 'Order Date' },
-    { id: 'documentID', label: 'Order ID' },
-    { id: 'orderTotal', label: 'Amount' },
+    { id: 'orderCreatedDate', label: '주문날짜' },
+    { id: 'documentID', label: '주문번호' },
+    { id: 'orderTotal', label: '총합계' },
   ];
 
   const formatText = (columnName, columnValue) => {
@@ -87,7 +87,7 @@ const OrderHistory = ({ orders }) => {
           ) : (
             <TableRow>
               <StyledTableCell colSpan={columns.length} align='center'>
-                No orders found.
+                주문 내역이 없습니다.
               </StyledTableCell>
             </TableRow>
           )}
